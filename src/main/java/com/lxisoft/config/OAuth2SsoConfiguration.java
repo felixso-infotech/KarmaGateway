@@ -55,8 +55,9 @@ public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().addFilterBefore(corsFilter, CsrfFilter.class).headers().frameOptions().disable().and()
 				.logout().logoutUrl("/api/logout").logoutSuccessHandler(ajaxLogoutSuccessHandler()).and()
 				.requestMatcher(new NegatedRequestMatcher(authorizationHeaderRequestMatcher)).authorizeRequests()
-				.antMatchers("/api/**").authenticated().antMatchers("/management/health").permitAll()
-				.antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN).anyRequest().permitAll();
+				.antMatchers("/api/**").permitAll()// authenticated()
+				.antMatchers("/management/health").permitAll().antMatchers("/management/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN).anyRequest().permitAll();
 	}
 
 	/**
