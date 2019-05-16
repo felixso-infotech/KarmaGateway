@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
@@ -146,7 +145,7 @@ public class AggregateCommandResource {
 	@PostMapping("/command/completed-activities")
 	@Timed
 	public ResponseEntity<CompletedActivityModel> createCompletedActivity(
-			@RequestPart CompletedActivityModel completedActivityModel) throws URISyntaxException, IOException {
+			@RequestBody CompletedActivityModel completedActivityModel) throws URISyntaxException, IOException {
 		log.debug("REST request to save CompletedActivity : {}", completedActivityModel);
 		if (completedActivityModel.getId() != null) {
 			throw new BadRequestAlertException("A new completedActivity cannot already have an ID", ENTITY_NAME,
