@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  * Activity
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-15T16:28:11.676+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-16T11:30:16.473+05:30[Asia/Calcutta]")
 
 public class Activity   {
   @JsonProperty("completedActivities")

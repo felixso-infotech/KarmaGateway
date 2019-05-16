@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-15T16:28:11.676+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-16T11:30:16.473+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateCommandResource", description = "the AggregateCommandResource API")
 public interface AggregateCommandResourceApi {
@@ -43,7 +43,7 @@ public interface AggregateCommandResourceApi {
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<CompletedActivityDTO> createCompletedActivityUsingPOST(@ApiParam(value = "" ,required=true )  @Valid @RequestBody Object UNKNOWN_BASE_TYPE);
+    ResponseEntity<CompletedActivityDTO> createCompletedActivityUsingPOST(@ApiParam(value = "completedActivityDTO" ,required=true )  @Valid @RequestBody CompletedActivityDTO completedActivityDTO);
 
 
     @ApiOperation(value = "createMedia", nickname = "createMediaUsingPOST", notes = "", response = MediaDTO.class, tags={ "aggregate-command-resource", })

@@ -30,12 +30,12 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": " http://35.196.249.196:8075/KarmaApp/v2/api-docs ",
+      "inputSpec": "http://35.196.249.196:8075/KarmaApp/v2/api-docs",
       "cliName": "KarmaApp"
     },
     "apis": {
       "KarmaApp": {
-        "spec": "http://localhost:8075/KarmaApp/v2/api-docs"
+        "spec": "http://35.196.249.196:8075/KarmaApp/v2/api-docs"
       }
     }
   }
