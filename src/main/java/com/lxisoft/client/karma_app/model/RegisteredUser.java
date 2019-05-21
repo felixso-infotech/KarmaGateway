@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "RegisteredUser entity. @author Muhammed Ruhail")
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-16T11:30:16.473+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-21T11:21:03.999139800+05:30[Asia/Calcutta]")
 
 public class RegisteredUser   {
   @JsonProperty("completedActivities")
@@ -54,6 +54,9 @@ public class RegisteredUser   {
 
   @JsonProperty("profilePic")
   private Media profilePic = null;
+
+  @JsonProperty("userId")
+  private String userId = null;
 
   public RegisteredUser completedActivities(List<CompletedActivity> completedActivities) {
     this.completedActivities = completedActivities;
@@ -285,6 +288,26 @@ public class RegisteredUser   {
     this.profilePic = profilePic;
   }
 
+  public RegisteredUser userId(String userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * Get userId
+   * @return userId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -305,12 +328,13 @@ public class RegisteredUser   {
         Objects.equals(this.noOfGoldMedals, registeredUser.noOfGoldMedals) &&
         Objects.equals(this.noOfSilverMedals, registeredUser.noOfSilverMedals) &&
         Objects.equals(this.phoneNumber, registeredUser.phoneNumber) &&
-        Objects.equals(this.profilePic, registeredUser.profilePic);
+        Objects.equals(this.profilePic, registeredUser.profilePic) &&
+        Objects.equals(this.userId, registeredUser.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(completedActivities, email, firstName, id, lastName, noOfBronzeMedals, noOfCoins, noOfGoldMedals, noOfSilverMedals, phoneNumber, profilePic);
+    return Objects.hash(completedActivities, email, firstName, id, lastName, noOfBronzeMedals, noOfCoins, noOfGoldMedals, noOfSilverMedals, phoneNumber, profilePic, userId);
   }
 
   @Override
@@ -329,6 +353,7 @@ public class RegisteredUser   {
     sb.append("    noOfSilverMedals: ").append(toIndentedString(noOfSilverMedals)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    profilePic: ").append(toIndentedString(profilePic)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

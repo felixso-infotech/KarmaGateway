@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * RegisteredUserDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-16T11:30:16.473+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-21T11:21:03.999139800+05:30[Asia/Calcutta]")
 
 public class RegisteredUserDTO   {
   @JsonProperty("email")
@@ -45,6 +45,9 @@ public class RegisteredUserDTO   {
 
   @JsonProperty("profilePicId")
   private Long profilePicId = null;
+
+  @JsonProperty("userId")
+  private String userId = null;
 
   public RegisteredUserDTO email(String email) {
     this.email = email;
@@ -246,6 +249,26 @@ public class RegisteredUserDTO   {
     this.profilePicId = profilePicId;
   }
 
+  public RegisteredUserDTO userId(String userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * Get userId
+   * @return userId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -265,12 +288,13 @@ public class RegisteredUserDTO   {
         Objects.equals(this.noOfGoldMedals, registeredUserDTO.noOfGoldMedals) &&
         Objects.equals(this.noOfSilverMedals, registeredUserDTO.noOfSilverMedals) &&
         Objects.equals(this.phoneNumber, registeredUserDTO.phoneNumber) &&
-        Objects.equals(this.profilePicId, registeredUserDTO.profilePicId);
+        Objects.equals(this.profilePicId, registeredUserDTO.profilePicId) &&
+        Objects.equals(this.userId, registeredUserDTO.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, firstName, id, lastName, noOfBronzeMedals, noOfCoins, noOfGoldMedals, noOfSilverMedals, phoneNumber, profilePicId);
+    return Objects.hash(email, firstName, id, lastName, noOfBronzeMedals, noOfCoins, noOfGoldMedals, noOfSilverMedals, phoneNumber, profilePicId, userId);
   }
 
   @Override
@@ -288,6 +312,7 @@ public class RegisteredUserDTO   {
     sb.append("    noOfSilverMedals: ").append(toIndentedString(noOfSilverMedals)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    profilePicId: ").append(toIndentedString(profilePicId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
