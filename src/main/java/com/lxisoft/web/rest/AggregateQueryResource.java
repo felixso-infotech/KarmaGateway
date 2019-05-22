@@ -62,9 +62,9 @@ public class AggregateQueryResource {
 			}
 			RegisteredUserModel registeredUserModel = new RegisteredUserModel();
 			registeredUserModel = registeredUserModel.setRegisteredUserId(registeredUserDTO.getId())
-					.setFirstName(registeredUserDTO.getFirstName()).setLastName(registeredUserDTO.getLastName())
-					.setEmail(registeredUserDTO.getEmail()).setPhoneNumber(registeredUserDTO.getPhoneNumber())
-					.setNoOfCoins(registeredUserDTO.getNoOfCoins())
+					.setUserId(registeredUserDTO.getUserId()).setFirstName(registeredUserDTO.getFirstName())
+					.setLastName(registeredUserDTO.getLastName()).setEmail(registeredUserDTO.getEmail())
+					.setPhoneNumber(registeredUserDTO.getPhoneNumber()).setNoOfCoins(registeredUserDTO.getNoOfCoins())
 					.setNoOfBronzeMedals(registeredUserDTO.getNoOfBronzeMedals())
 					.setNoOfSilverMedals(registeredUserDTO.getNoOfSilverMedals())
 					.setNoOfGoldMedals(registeredUserDTO.getNoOfGoldMedals());
@@ -101,9 +101,9 @@ public class AggregateQueryResource {
 						.getBody();
 			}
 			registeredUserModel = registeredUserModel.setRegisteredUserId(registeredUserDTO.getId())
-					.setFirstName(registeredUserDTO.getFirstName()).setLastName(registeredUserDTO.getLastName())
-					.setEmail(registeredUserDTO.getEmail()).setPhoneNumber(registeredUserDTO.getPhoneNumber())
-					.setNoOfCoins(registeredUserDTO.getNoOfCoins())
+					.setUserId(registeredUserDTO.getUserId()).setFirstName(registeredUserDTO.getFirstName())
+					.setLastName(registeredUserDTO.getLastName()).setEmail(registeredUserDTO.getEmail())
+					.setPhoneNumber(registeredUserDTO.getPhoneNumber()).setNoOfCoins(registeredUserDTO.getNoOfCoins())
 					.setNoOfBronzeMedals(registeredUserDTO.getNoOfBronzeMedals())
 					.setNoOfSilverMedals(registeredUserDTO.getNoOfSilverMedals())
 					.setNoOfGoldMedals(registeredUserDTO.getNoOfGoldMedals());
@@ -450,6 +450,42 @@ public class AggregateQueryResource {
 			activityModels.add(activityModel);
 		}
 		return ResponseEntity.ok().body(activityModels);
+	}
+
+	/**
+	 * GET /registered-user/:userId : get the "registeredUser"
+	 * 
+	 * @param userId the id of the registeredUserDTO to retrieve
+	 * @return the ResponseEntity with status 200 (OK) and with body the
+	 *         instructionVideoDTO, or with status 404 (Not Found)
+	 */
+	@GetMapping("/query/registered-user-by-activityId/{userId}")
+	@Timed
+	public ResponseEntity<RegisteredUserModel> getRegisteredUserByUserId(@PathVariable String userId) {
+		log.debug("REST request to get RegisteredUser : {}", userId);
+		RegisteredUserDTO registeredUserDTO = aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(userId)
+				.getBody();
+		RegisteredUserModel registeredUserModel = new RegisteredUserModel();
+		if (registeredUserDTO != null) {
+			MediaDTO mediaDTO = null;
+			if (registeredUserDTO.getProfilePicId() != null) {
+				mediaDTO = aggregateQueryResourceApi.getMediaByIdUsingGET(registeredUserDTO.getProfilePicId())
+						.getBody();
+			}
+			registeredUserModel = registeredUserModel.setRegisteredUserId(registeredUserDTO.getId())
+					.setUserId(registeredUserDTO.getUserId()).setFirstName(registeredUserDTO.getFirstName())
+					.setLastName(registeredUserDTO.getLastName()).setEmail(registeredUserDTO.getEmail())
+					.setPhoneNumber(registeredUserDTO.getPhoneNumber()).setNoOfCoins(registeredUserDTO.getNoOfCoins())
+					.setNoOfBronzeMedals(registeredUserDTO.getNoOfBronzeMedals())
+					.setNoOfSilverMedals(registeredUserDTO.getNoOfSilverMedals())
+					.setNoOfGoldMedals(registeredUserDTO.getNoOfGoldMedals());
+			if (mediaDTO != null) {
+				registeredUserModel.setProfilePicId(mediaDTO.getId()).setProfilePicFileName(mediaDTO.getFileName())
+						.setProfilePicFile(mediaDTO.getFile())
+						.setProfilePicFileContentType(mediaDTO.getFileContentType());
+			}
+		}
+		return ResponseEntity.ok().body(registeredUserModel);
 	}
 
 }

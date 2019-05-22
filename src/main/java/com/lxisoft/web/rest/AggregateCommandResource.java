@@ -73,6 +73,7 @@ public class AggregateCommandResource {
 		}
 
 		RegisteredUserDTO registeredUserDTO = new RegisteredUserDTO();
+		registeredUserDTO.setUserId(registeredUserModel.getUserId());
 		registeredUserDTO.setFirstName(registeredUserModel.getFirstName());
 		registeredUserDTO.setLastName(registeredUserModel.getLastName());
 		registeredUserDTO.setEmail(registeredUserModel.getEmail());
@@ -113,6 +114,7 @@ public class AggregateCommandResource {
 		}
 
 		RegisteredUserDTO registeredUserDTO = new RegisteredUserDTO();
+		registeredUserDTO.setUserId(registeredUserModel.getUserId());
 		registeredUserDTO.setId(registeredUserModel.getRegisteredUserId());
 		registeredUserDTO.setFirstName(registeredUserModel.getFirstName());
 		registeredUserDTO.setLastName(registeredUserModel.getLastName());

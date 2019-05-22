@@ -4,6 +4,8 @@ public class RegisteredUserModel {
 
 	private Long registeredUserId;
 
+	private String userId;
+
 	private String firstName;
 
 	private String lastName;
@@ -34,6 +36,15 @@ public class RegisteredUserModel {
 
 	public RegisteredUserModel setRegisteredUserId(Long registeredUserId) {
 		this.registeredUserId = registeredUserId;
+		return this;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public RegisteredUserModel setUserId(String userId) {
+		this.userId = userId;
 		return this;
 	}
 
