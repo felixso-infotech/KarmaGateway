@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-22T09:45:46.660024400+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-22T10:16:14.444624900+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateQueryResource", description = "the AggregateQueryResource API")
 public interface AggregateQueryResourceApi {
@@ -200,5 +200,17 @@ public interface AggregateQueryResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<RegisteredUserDTO> getRegisteredUserByPhoneNumberUsingGET(@ApiParam(value = "phoneNumber",required=true) @PathVariable("phoneNumber") Long phoneNumber);
+
+
+    @ApiOperation(value = "getRegisteredUserByUserId", nickname = "getRegisteredUserByUserIdUsingGET", notes = "", response = RegisteredUserDTO.class, tags={ "aggregate-query-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = RegisteredUserDTO.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/query/registered-user/userId",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<RegisteredUserDTO> getRegisteredUserByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 }
