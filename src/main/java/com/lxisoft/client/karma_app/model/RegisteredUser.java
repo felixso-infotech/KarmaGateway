@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  */
 @ApiModel(description = "RegisteredUser entity. @author Muhammed Ruhail")
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-22T10:47:15.115011400+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-22T16:56:02.120142700+05:30[Asia/Calcutta]")
 
 public class RegisteredUser   {
   @JsonProperty("completedActivities")
