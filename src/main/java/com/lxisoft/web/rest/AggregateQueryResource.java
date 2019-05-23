@@ -459,7 +459,7 @@ public class AggregateQueryResource {
 	 * @return the ResponseEntity with status 200 (OK) and with body the
 	 *         instructionVideoDTO, or with status 404 (Not Found)
 	 */
-	@GetMapping("/query/registered-user-by-activityId/{userId}")
+	@GetMapping("/query/registered-user-by-userId/{userId}")
 	@Timed
 	public ResponseEntity<RegisteredUserModel> getRegisteredUserByUserId(@PathVariable String userId) {
 		log.debug("REST request to get RegisteredUser : {}", userId);
