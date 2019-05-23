@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-22T16:56:02.120142700+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-05-23T11:50:58.962547100+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateQueryResource", description = "the AggregateQueryResource API")
 public interface AggregateQueryResourceApi {
@@ -208,7 +208,7 @@ public interface AggregateQueryResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/query/registered-user/userId",
+    @RequestMapping(value = "/api/query/registered-user/{userId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<RegisteredUserDTO> getRegisteredUserByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
