@@ -88,7 +88,9 @@ public class AggregateCommandResource {
 
 		RegisteredUserDTO result = aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO)
 				.getBody();
-
+		
+		registeredUserModel.setRegisteredUserId(result.getId());
+		
 		return ResponseEntity.created(new URI("/api/registered-users/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
 				.body(registeredUserModel);
