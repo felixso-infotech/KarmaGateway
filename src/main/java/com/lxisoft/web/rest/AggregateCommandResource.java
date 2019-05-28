@@ -90,8 +90,8 @@ public class AggregateCommandResource {
 				.getBody();
 		
 		registeredUserModel.setRegisteredUserId(result.getId());
-		log.info("registereduser id",result.getId());
-		log.info("registeredUserModel id",registeredUserModel.getRegisteredUserId());
+		log.info("registereduser id{}",result.getId());
+		log.info("registeredUserModel id{}",registeredUserModel.getRegisteredUserId());
 		
 		return ResponseEntity.created(new URI("/api/registered-users/" + result.getId()))
 				.headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
