@@ -162,6 +162,10 @@ public class AggregateCommandResource {
 		completedActivityDTO.setRegisteredUserId(completedActivityModel.getRegisteredUserId());
 		completedActivityDTO = aggregateCommandResourceApi.createCompletedActivityUsingPOST(completedActivityDTO)
 				.getBody();
+		log.debug("saved CompletedActivity : {}", completedActivityModel);
+		log.debug("proof : {}", completedActivityModel.getProofs().size());
+		
+		
 		if (completedActivityModel.getProofs() != null) {
 			List<MediaDTO> mediaDTOs = completedActivityModel.getProofs();
 			for (MediaDTO mediaDTO : mediaDTOs) {
