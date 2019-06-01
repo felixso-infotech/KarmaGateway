@@ -23,6 +23,7 @@ import com.lxisoft.client.karma_app.model.RegisteredUserDTO;
 import com.lxisoft.model.ActivityModel;
 import com.lxisoft.model.CompletedActivityModel;
 import com.lxisoft.model.InstructionVideoModel;
+import com.lxisoft.model.MediaModel;
 import com.lxisoft.model.RegisteredUserModel;
 
 @RestController
@@ -487,5 +488,42 @@ public class AggregateQueryResource {
 		}
 		return ResponseEntity.ok().body(registeredUserModel);
 	}
+	
+	/**
+	 * GET /media/:id : get the "completedActivityMedias of registered user"
+	 * completedActivity.
+	 *
+	 * @param registeredUserId the id of the registeredUser to retrieve
+	 * @return the ResponseEntity with status 200 (OK) and with body the
+	 *         MediaDTO, or with status 404 (Not Found)
+	 */
+	@GetMapping("/query/all-completed-activity-media/{registeredUserId}")
+	@Timed
+	public ResponseEntity<List<MediaModel>> findAllCompletedActivityMediasByRegisteredUserId(@PathVariable Long registeredUserId,
+			Pageable pageable) throws URISyntaxException {
+		log.debug("REST request to get completed activity medias by user id : {}", registeredUserId);
+
+		List<MediaDTO> mediaDtoList = aggregateQueryResourceApi.
+				findAllCompletedActivityMediasByRegisteredUserIdUsingGET(registeredUserId, null, null, null, null, null, null, null, null, null, null).getBody();
+		
+		List<MediaModel> mediaModelList=new ArrayList<MediaModel>();
+		
+		for(MediaDTO media:mediaDtoList){
+			MediaModel mediaModel=new MediaModel();
+			
+			mediaModel.setActivityId(media.getActivityId());
+			mediaModel.setCompletedActivityId(media.getCompletedActivityId());
+			mediaModel.setFile(media.getFile());
+			mediaModel.setFileName(media.getFileName());
+			mediaModel.setFileContentType(media.getFileContentType());
+			
+			mediaModelList.add(mediaModel);
+		}
+		
+		return ResponseEntity.ok().body(mediaModelList);
+
+	}
+
+	
 
 }
