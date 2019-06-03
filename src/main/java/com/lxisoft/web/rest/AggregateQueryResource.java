@@ -511,6 +511,7 @@ public class AggregateQueryResource {
 		for(MediaDTO media:mediaDtoList){
 			MediaModel mediaModel=new MediaModel();
 			
+			mediaModel.setId(media.getId());
 			mediaModel.setActivityId(media.getActivityId());
 			mediaModel.setCompletedActivityId(media.getCompletedActivityId());
 			mediaModel.setFile(media.getFile());
