@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
  * Media
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-06-01T13:57:58.509243200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-06-06T16:29:24.830779600+05:30[Asia/Calcutta]")
 
 public class Media   {
   @JsonProperty("activity")
