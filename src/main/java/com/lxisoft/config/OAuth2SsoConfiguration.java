@@ -24,8 +24,6 @@ import io.github.jhipster.security.AjaxLogoutSuccessHandler;
 
 @EnableOAuth2Sso
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-@Configuration
 public class OAuth2SsoConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final RequestMatcher authorizationHeaderRequestMatcher;
