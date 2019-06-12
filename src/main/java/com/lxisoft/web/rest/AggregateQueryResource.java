@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.lxisoft.client.karma_app.ClientConfiguration;
 import com.lxisoft.client.karma_app.api.AggregateQueryResourceApi;
 import com.lxisoft.client.karma_app.model.ActivityDTO;
 import com.lxisoft.client.karma_app.model.CompletedActivityDTO;
@@ -32,6 +34,8 @@ public class AggregateQueryResource {
 	private final Logger log = LoggerFactory.getLogger(AggregateQueryResource.class);
 
 	private AggregateQueryResourceApi aggregateQueryResourceApi;
+	
+	//private AuthorizedFeignClient authorizedFeignClient;
 
 	public AggregateQueryResource(AggregateQueryResourceApi aggregateQueryResourceApi) {
 		this.aggregateQueryResourceApi = aggregateQueryResourceApi;
@@ -360,14 +364,20 @@ public class AggregateQueryResource {
 	@Timed
 	public ResponseEntity<InstructionVideoModel> getInstructionVideoByActivityId(@PathVariable Long activityId) {
 		log.debug("REST request to get InstructionVideo : {}", activityId);
+		//log.info("******config{}",config.);
+		
 		InstructionVideoDTO instructionVideoDTO = aggregateQueryResourceApi
 				.getInstructionVideoByActivityIdUsingGET(activityId).getBody();
+		
+		
 		InstructionVideoModel instructionVideoModel = new InstructionVideoModel();
 		if (instructionVideoDTO != null) {
 			instructionVideoModel.setId(instructionVideoDTO.getId()).setFileName(instructionVideoDTO.getFileName())
 					.setFile(instructionVideoDTO.getFile())
-					.setFileContentType(instructionVideoDTO.getFileContentType());
+					.setFileContentType(instructionVideoDTO.getFileContentType())
+					.setFileUrl("http://35.196.249.196:8075/KarmaApp/"+instructionVideoDTO.getFileUrl());
 
+			log.info("url***{}",instructionVideoModel.getFileUrl());
 		}
 		return ResponseEntity.ok().body(instructionVideoModel);
 	}

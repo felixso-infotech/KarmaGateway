@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * InstructionVideoDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-06-06T16:29:24.830779600+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-06-12T10:08:37.448866800+05:30[Asia/Calcutta]")
 
 public class InstructionVideoDTO   {
   @JsonProperty("encodedInstructionVideo")
@@ -27,6 +27,9 @@ public class InstructionVideoDTO   {
 
   @JsonProperty("fileName")
   private String fileName = null;
+
+  @JsonProperty("fileUrl")
+  private String fileUrl = null;
 
   @JsonProperty("id")
   private Long id = null;
@@ -111,6 +114,26 @@ public class InstructionVideoDTO   {
     this.fileName = fileName;
   }
 
+  public InstructionVideoDTO fileUrl(String fileUrl) {
+    this.fileUrl = fileUrl;
+    return this;
+  }
+
+  /**
+   * Get fileUrl
+   * @return fileUrl
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getFileUrl() {
+    return fileUrl;
+  }
+
+  public void setFileUrl(String fileUrl) {
+    this.fileUrl = fileUrl;
+  }
+
   public InstructionVideoDTO id(Long id) {
     this.id = id;
     return this;
@@ -145,12 +168,13 @@ public class InstructionVideoDTO   {
         Objects.equals(this.file, instructionVideoDTO.file) &&
         Objects.equals(this.fileContentType, instructionVideoDTO.fileContentType) &&
         Objects.equals(this.fileName, instructionVideoDTO.fileName) &&
+        Objects.equals(this.fileUrl, instructionVideoDTO.fileUrl) &&
         Objects.equals(this.id, instructionVideoDTO.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(encodedInstructionVideo, file, fileContentType, fileName, id);
+    return Objects.hash(encodedInstructionVideo, file, fileContentType, fileName, fileUrl, id);
   }
 
   @Override
@@ -162,6 +186,7 @@ public class InstructionVideoDTO   {
     sb.append("    file: ").append(toIndentedString(file)).append("\n");
     sb.append("    fileContentType: ").append(toIndentedString(fileContentType)).append("\n");
     sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
+    sb.append("    fileUrl: ").append(toIndentedString(fileUrl)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
