@@ -79,12 +79,12 @@ public class AggregateCommandResource {
 		registeredUserDTO.setEmail(registeredUserModel.getEmail());
 		registeredUserDTO.setPhoneNumber(registeredUserModel.getPhoneNumber());
 
-		MediaDTO mediaDTO = new MediaDTO();
+		/*MediaDTO mediaDTO = new MediaDTO();
 		mediaDTO.setFileName(registeredUserModel.getFirstName());
 		mediaDTO.setFile(registeredUserModel.getProfilePicFile());
 		mediaDTO.setFileContentType(registeredUserModel.getProfilePicFileContentType());
 		mediaDTO = aggregateCommandResourceApi.createMediaUsingPOST(mediaDTO).getBody();
-		registeredUserDTO.setProfilePicId(mediaDTO.getId());
+		registeredUserDTO.setProfilePicId(mediaDTO.getId());*/
 
 		RegisteredUserDTO result = aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO)
 				.getBody();
@@ -125,12 +125,15 @@ public class AggregateCommandResource {
 		registeredUserDTO.setEmail(registeredUserModel.getEmail());
 		registeredUserDTO.setPhoneNumber(registeredUserModel.getPhoneNumber());
 
+		if(registeredUserModel.getProfilePicFile()!=null){
 		MediaDTO mediaDTO = new MediaDTO();
-		mediaDTO.setId(registeredUserModel.getProfilePicId());
+		//mediaDTO.setId(registeredUserModel.getProfilePicId());
 		mediaDTO.setFileName(registeredUserModel.getFirstName());
 		mediaDTO.setFile(registeredUserModel.getProfilePicFile());
 		mediaDTO.setFileContentType(registeredUserModel.getProfilePicFileContentType());
 		mediaDTO = aggregateCommandResourceApi.createMediaUsingPOST(mediaDTO).getBody();
+		registeredUserModel.setProfilePicId(mediaDTO.getId());
+		}
 
 		RegisteredUserDTO result = aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO)
 				.getBody();
