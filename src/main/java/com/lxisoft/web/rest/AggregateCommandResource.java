@@ -124,9 +124,10 @@ public class AggregateCommandResource {
 		registeredUserDTO.setLastName(registeredUserModel.getLastName());
 		registeredUserDTO.setEmail(registeredUserModel.getEmail());
 		registeredUserDTO.setPhoneNumber(registeredUserModel.getPhoneNumber());
-
-		if(registeredUserModel.getProfilePicFile()!=null){
+		
 		MediaDTO mediaDTO = new MediaDTO();
+		
+		if(registeredUserModel.getProfilePicFile()!=null){
 		//mediaDTO.setId(registeredUserModel.getProfilePicId());
 		mediaDTO.setFileName(registeredUserModel.getFirstName());
 		mediaDTO.setFile(registeredUserModel.getProfilePicFile());
