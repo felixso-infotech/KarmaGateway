@@ -132,9 +132,10 @@ public class AggregateCommandResource {
 		mediaDTO.setFile(registeredUserModel.getProfilePicFile());
 		mediaDTO.setFileContentType(registeredUserModel.getProfilePicFileContentType());
 		mediaDTO = aggregateCommandResourceApi.createMediaUsingPOST(mediaDTO).getBody();
-		registeredUserModel.setProfilePicId(mediaDTO.getId());
+		registeredUserDTO.setProfilePicId(mediaDTO.getId());
 		}
-
+		registeredUserModel.setProfilePicId(registeredUserDTO.getProfilePicId());
+		
 		RegisteredUserDTO result = aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO)
 				.getBody();
 		return ResponseEntity.created(new URI("/api/registered-users/" + result.getId()))
