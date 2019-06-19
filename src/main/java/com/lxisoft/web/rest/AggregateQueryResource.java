@@ -535,6 +535,31 @@ public class AggregateQueryResource {
 
 	}
 
-	
+	/**
+	 * GET /media/:id : get the profilepicid of registeredUser.
+	 *
+	 * @param id the profilepicid of the registeredUser to retrieve
+	 * @return the ResponseEntity with status 200 (OK) and with body the
+	 *         activityModel, or with status 404 (Not Found)
+	 */
+	@GetMapping("/query/media/{id}")
+	@Timed
+	public ResponseEntity<MediaModel> getMediaById(@PathVariable Long id, Pageable pageable) {
+		log.debug("REST request to get a activitiy");
+		MediaDTO mediaDTO = aggregateQueryResourceApi.getMediaByIdUsingGET(id).getBody();
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&77" + mediaDTO);
+		
+		MediaModel mediaModel=new MediaModel();
+		
+		if (mediaDTO != null) {
+			mediaModel.setId(mediaDTO.getId());
+			mediaModel.setFile(mediaDTO.getFile());
+			mediaModel.setFileName(mediaDTO.getFileName());
+			mediaModel.setFileContentType(mediaDTO.getFileContentType());
+			
+		}
+		return ResponseEntity.ok().body(mediaModel);
+	}
+
 
 }
