@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('build stage') {
+    stage('build') {
       steps {
-        sh 'mvnw'
+        sh 'mvn spring-boot:run'
       }
     }
   }
