@@ -27,5 +27,22 @@
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "enableTranslation": false
+  },
+  "generator-jhipster-swagger-cli": {
+    "promptValues": {
+      "inputSpec": "http://35.208.4.27:8065/Karma/v2/api-docs",
+      "cliName": "Karma"
+    },
+    "apis": {
+      "karma": {
+        "spec": "http://35.208.4.27:8065/Karma/v2/api-docs"
+      },
+      "UserResponse": {
+        "spec": "http://35.208.4.27:8075/UserResponse/v2/api-docs"
+      },
+      "Karma": {
+        "spec": "http://35.208.4.27:8065/Karma/v2/api-docs"
+      }
+    }
   }
 }
