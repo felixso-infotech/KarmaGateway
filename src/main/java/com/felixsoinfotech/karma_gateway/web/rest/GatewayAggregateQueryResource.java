@@ -27,14 +27,16 @@
   import org.springframework.web.bind.annotation.RestController;  
   import com.codahale.metrics.annotation.Timed;  
   import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi; 
-  import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate; 
+  import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
+import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateQueryResourceApi;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate; 
   
   /**
    * TODO Provide a detailed description here
    * 
    * @author Owner sarangibalu, sarangibalu.a@lxisoft.com
    */
-
+ 
   /**
    * REST controller for managing Query resources.
    */  
@@ -46,9 +48,13 @@
      private final Logger log =  LoggerFactory.getLogger(GatewayAggregateQueryResource.class);
   
      private AggregateQueryResourceApi aggregateQueryResourceApi;
+     
+     private UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi;
    
-     public GatewayAggregateQueryResource(AggregateQueryResourceApi aggregateQueryResourceApi){
+     public GatewayAggregateQueryResource(AggregateQueryResourceApi aggregateQueryResourceApi,
+    		                              UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi){
                        this.aggregateQueryResourceApi=aggregateQueryResourceApi; 
+                       this.userResponseAggregateQueryResourceApi=userResponseAggregateQueryResourceApi;
       }
   
    /**
@@ -72,8 +78,10 @@
 		      
 			  if(committedActivityAggregate != null) {
 		           if(committedActivityAggregate.getCommittedActivityId() != null) {
-		               // committedActivityAggregate.setNoOfLoves(aggregateQueryResourceUserResponseApi.getNumberOfLovesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody());
-		                //committedActivityAggregate.setNoOfComments(aggregateQueryResourceUserResponseApi.getNumberOfCommentsByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody());
+		        	        
+		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
+		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
+		               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
 		  
 		  } } }
 		  

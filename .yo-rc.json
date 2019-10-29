@@ -30,8 +30,8 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": "http://35.208.4.27:8065/Karma/v2/api-docs",
-      "cliName": "Karma"
+      "inputSpec": "http://35.208.4.27:8075/UserResponse/v2/api-docs",
+      "cliName": "UserResponse"
     },
     "apis": {
       "karma": {
