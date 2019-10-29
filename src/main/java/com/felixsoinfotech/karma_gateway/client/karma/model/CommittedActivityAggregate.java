@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  * CommittedActivityAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-28T23:52:28.379623700+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-29T16:00:01.555427800+05:30[Asia/Calcutta]")
 
 public class CommittedActivityAggregate   {
   @JsonProperty("activityCreatedDate")
@@ -48,6 +48,9 @@ public class CommittedActivityAggregate   {
 
   @JsonProperty("imageString")
   private String imageString = null;
+
+  @JsonProperty("imageStringContentType")
+  private String imageStringContentType = null;
 
   @JsonProperty("lastName")
   private String lastName = null;
@@ -163,6 +166,9 @@ public class CommittedActivityAggregate   {
 
   @JsonProperty("videoString")
   private String videoString = null;
+
+  @JsonProperty("videoStringContentType")
+  private String videoStringContentType = null;
 
   public CommittedActivityAggregate activityCreatedDate(OffsetDateTime activityCreatedDate) {
     this.activityCreatedDate = activityCreatedDate;
@@ -352,6 +358,26 @@ public class CommittedActivityAggregate   {
 
   public void setImageString(String imageString) {
     this.imageString = imageString;
+  }
+
+  public CommittedActivityAggregate imageStringContentType(String imageStringContentType) {
+    this.imageStringContentType = imageStringContentType;
+    return this;
+  }
+
+  /**
+   * Get imageStringContentType
+   * @return imageStringContentType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getImageStringContentType() {
+    return imageStringContentType;
+  }
+
+  public void setImageStringContentType(String imageStringContentType) {
+    this.imageStringContentType = imageStringContentType;
   }
 
   public CommittedActivityAggregate lastName(String lastName) {
@@ -642,6 +668,26 @@ public class CommittedActivityAggregate   {
     this.videoString = videoString;
   }
 
+  public CommittedActivityAggregate videoStringContentType(String videoStringContentType) {
+    this.videoStringContentType = videoStringContentType;
+    return this;
+  }
+
+  /**
+   * Get videoStringContentType
+   * @return videoStringContentType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getVideoStringContentType() {
+    return videoStringContentType;
+  }
+
+  public void setVideoStringContentType(String videoStringContentType) {
+    this.videoStringContentType = videoStringContentType;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -661,6 +707,7 @@ public class CommittedActivityAggregate   {
         Objects.equals(this.dimensions, committedActivityAggregate.dimensions) &&
         Objects.equals(this.firstName, committedActivityAggregate.firstName) &&
         Objects.equals(this.imageString, committedActivityAggregate.imageString) &&
+        Objects.equals(this.imageStringContentType, committedActivityAggregate.imageStringContentType) &&
         Objects.equals(this.lastName, committedActivityAggregate.lastName) &&
         Objects.equals(this.likedUserPhotos, committedActivityAggregate.likedUserPhotos) &&
         Objects.equals(this.noOfComments, committedActivityAggregate.noOfComments) &&
@@ -674,12 +721,13 @@ public class CommittedActivityAggregate   {
         Objects.equals(this.title, committedActivityAggregate.title) &&
         Objects.equals(this.type, committedActivityAggregate.type) &&
         Objects.equals(this.userId, committedActivityAggregate.userId) &&
-        Objects.equals(this.videoString, committedActivityAggregate.videoString);
+        Objects.equals(this.videoString, committedActivityAggregate.videoString) &&
+        Objects.equals(this.videoStringContentType, committedActivityAggregate.videoStringContentType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityCreatedDate, activityDescription, activityId, challengeId, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, lastName, likedUserPhotos, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, successMessage, timeElapsed, title, type, userId, videoString);
+    return Objects.hash(activityCreatedDate, activityDescription, activityId, challengeId, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, imageStringContentType, lastName, likedUserPhotos, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, successMessage, timeElapsed, title, type, userId, videoString, videoStringContentType);
   }
 
   @Override
@@ -696,6 +744,7 @@ public class CommittedActivityAggregate   {
     sb.append("    dimensions: ").append(toIndentedString(dimensions)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    imageString: ").append(toIndentedString(imageString)).append("\n");
+    sb.append("    imageStringContentType: ").append(toIndentedString(imageStringContentType)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    likedUserPhotos: ").append(toIndentedString(likedUserPhotos)).append("\n");
     sb.append("    noOfComments: ").append(toIndentedString(noOfComments)).append("\n");
@@ -710,6 +759,7 @@ public class CommittedActivityAggregate   {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    videoString: ").append(toIndentedString(videoString)).append("\n");
+    sb.append("    videoStringContentType: ").append(toIndentedString(videoStringContentType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
