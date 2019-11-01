@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-29T15:59:56.209724200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-01T12:34:28.420822900+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateCommandResource", description = "the UserResponseAggregateCommandResource API")
 public interface UserResponseAggregateCommandResourceApi {
@@ -55,18 +55,18 @@ public interface UserResponseAggregateCommandResourceApi {
     ResponseEntity<Void> deleteReplyUsingDELETE1(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "loveActivity", nickname = "loveActivityUsingPOST", notes = "", response = LoveDTO.class, tags={ "user-response-aggregate-command-resource", })
+    @ApiOperation(value = "loveCommittedActivity", nickname = "loveCommittedActivityUsingPOST", notes = "", response = LoveDTO.class, tags={ "user-response-aggregate-command-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = LoveDTO.class),
         @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/command/love-activity",
+    @RequestMapping(value = "/api/command/love-committedactivity",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<LoveDTO> loveActivityUsingPOST(@ApiParam(value = "loveDTO" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
+    ResponseEntity<LoveDTO> loveCommittedActivityUsingPOST(@ApiParam(value = "loveDTO" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
 
 
     @ApiOperation(value = "saveComment", nickname = "saveCommentUsingPOST", notes = "", response = CommentDTO.class, tags={ "user-response-aggregate-command-resource", })
@@ -97,14 +97,14 @@ public interface UserResponseAggregateCommandResourceApi {
     ResponseEntity<ReplyDTO> saveReplyUsingPOST(@ApiParam(value = "replyDTO" ,required=true )  @Valid @RequestBody ReplyDTO replyDTO);
 
 
-    @ApiOperation(value = "unloveActivity", nickname = "unloveActivityUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })
+    @ApiOperation(value = "unloveCommittedActivity", nickname = "unloveCommittedActivityUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 204, message = "No Content"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden") })
-    @RequestMapping(value = "/api/command/unlove-activity",
+    @RequestMapping(value = "/api/command/unlove-committedactivity",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> unloveActivityUsingDELETE(@ApiParam(value = "deleteLoveModel" ,required=true )  @Valid @RequestBody DeleteLoveModel deleteLoveModel);
+    ResponseEntity<Void> unloveCommittedActivityUsingDELETE(@ApiParam(value = "deleteLoveModel" ,required=true )  @Valid @RequestBody DeleteLoveModel deleteLoveModel);
 
 }
