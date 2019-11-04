@@ -21,7 +21,6 @@ package com.felixsoinfotech.karma_gateway.web.rest;
  * @author Owner sarangibalu, sarangibalu.a@lxisoft.com
  */
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.slf4j.Logger;
@@ -42,7 +41,10 @@ import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateCommandResourceApi;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentDTO;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.DeleteLoveModel;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.LoveDTO;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyDTO;
 import com.felixsoinfotech.karma_gateway.web.rest.errors.BadRequestAlertException;
 import com.felixsoinfotech.karma_gateway.web.rest.util.HeaderUtil;
 
@@ -70,29 +72,6 @@ public class GatewayAggregateCommandResource {
 	
 	
     /**
-     * POST  /activities : Create a new activity.
-     *
-     * @param activityDTO the activityDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new activityDTO, or with status 400 (Bad Request) if the activity has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PostMapping("/create-activity")
-    @Timed
-    public ResponseEntity<ActivityAggregate> createActivity(@RequestBody ActivityAggregate activityAggregate) throws URISyntaxException {   	
-        log.debug("REST request to save Activity : {}", activityAggregate);
-        if (activityAggregate.getActivityDTO().getId() != null) {
-            throw new BadRequestAlertException("A new activity cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        
-        ActivityAggregate result = aggregateCommandResourceApi.createActivityUsingPOST1(activityAggregate).getBody();
-        
-        return ResponseEntity.created(new URI("/activities/" + activityAggregate.getActivityDTO().getId()))
-                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, activityAggregate.getActivityDTO().getId().toString()))
-                .body(result);
-    }
-	
-	
-    /**
      * POST  /loves : save a new love.
      *
      * @param loveDTO the loveDTO to create
@@ -109,11 +88,88 @@ public class GatewayAggregateCommandResource {
         
         LoveDTO result = userResponseAggregateCommandResourceApi.loveCommittedActivityUsingPOST(loveDTO).getBody();
         
-        return ResponseEntity.created(new URI("/api/colove-activity/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
+    }
+    
+    /**
+     * DELETE  /loves : delete the loved activity of the user.
+     *
+     * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/unlove-committedactivity")
+    @Timed
+    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
+        log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
+        
+        userResponseAggregateCommandResourceApi.unloveCommittedActivityUsingDELETE(deleteLoveModel).getBody();
+        
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
+    }
+    
+    
+    /**
+     * POST  /comments : save a new comment.
+     *
+     * @param commentDTO the commentDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new commentDTO, or with status 400 (Bad Request) if the comment has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/save-comment")
+    @Timed
+    public ResponseEntity<CommentDTO> saveComment(@RequestBody CommentDTO commentDTO) throws URISyntaxException {
+        log.debug("REST request to save Comment : {}", commentDTO);        
+        if (commentDTO.getId() != null) {
+            throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        
+        CommentDTO commentDto = userResponseAggregateCommandResourceApi.saveCommentUsingPOST(commentDTO).getBody();
+        
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, commentDto.toString())).build();
+    }
+    
+    /**
+     * POST  /replies : Create a new reply.
+     *
+     * @param replyDTO the replyDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new replyDTO, or with status 400 (Bad Request) if the reply has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/save-reply")
+    @Timed
+    public ResponseEntity<ReplyDTO> saveReply(@RequestBody ReplyDTO replyDTO) throws URISyntaxException {
+        log.debug("REST request to save Reply : {}", replyDTO);
+        if (replyDTO.getId() != null) {
+            throw new BadRequestAlertException("A new reply cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        
+        ReplyDTO replyDto = userResponseAggregateCommandResourceApi.saveReplyUsingPOST(replyDTO).getBody();
+        
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, replyDto.toString())).build();
+    }  
+    
+    
+    /**
+     * POST  /activities : Create a new activity.
+     *
+     * @param activityDTO the activityDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new activityDTO, or with status 400 (Bad Request) if the activity has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/create-activity")
+    @Timed
+    public ResponseEntity<ActivityAggregate> createActivity(@RequestBody ActivityAggregate activityAggregate) throws URISyntaxException {   	
+        log.debug("REST request to save Activity : {}", activityAggregate);
+        if (activityAggregate.getActivityDTO().getId() != null) {
+            throw new BadRequestAlertException("A new activity cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        
+        ActivityAggregate result = aggregateCommandResourceApi.createActivityUsingPOST1(activityAggregate).getBody();
+        
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
     }
 	
+	   	
     /**
      * PUT  /activities : Updates an existing activity.
      *
@@ -133,9 +189,7 @@ public class GatewayAggregateCommandResource {
         
         ActivityAggregate result = aggregateCommandResourceApi.updateActivityUsingPUT1(activityAggregate).getBody();
         
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, activityAggregate.getActivityDTO().getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
     }  
 
 
@@ -154,11 +208,9 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new committedActivity cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        CommittedActivityDTO result = aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityDTO).getBody();
+        CommittedActivityDTO committedActivityDto = aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityDTO).getBody();
         
-        return ResponseEntity.created(new URI("/api/committed-activities/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, committedActivityDto.toString())).build();
     }
     
     /**
@@ -178,11 +230,11 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        CommittedActivityDTO result = aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityDTO).getBody();
+        CommittedActivityDTO committedActivityDto = aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityDTO).getBody();
         
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, committedActivityDTO.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, committedActivityDto.toString())).build();
+        
+        
     }
     
     /**
@@ -200,11 +252,10 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new registeredUser cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        RegisteredUserDTO result = aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO).getBody();
+        RegisteredUserDTO registeredUserDto = aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO).getBody();
         
-        return ResponseEntity.created(new URI("/api/registered-users/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, registeredUserDto.toString())).build();
+              
     }
     
     /**
@@ -224,11 +275,9 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        RegisteredUserDTO result = aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO).getBody();
+        RegisteredUserDTO registeredUserDto = aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO).getBody();
         
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, registeredUserDTO.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, registeredUserDto.toString())).build();
     }
     
     /**
