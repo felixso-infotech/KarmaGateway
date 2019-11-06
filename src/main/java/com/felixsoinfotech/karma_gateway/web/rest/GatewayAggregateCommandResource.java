@@ -78,7 +78,7 @@ public class GatewayAggregateCommandResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new loveDTO, or with status 400 (Bad Request) if the love has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/love-committedactivity")
+    @PostMapping("/save-love")
     @Timed
     public ResponseEntity<LoveDTO> loveCommittedActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
         log.debug("REST request to save Love : {}", loveDTO);
@@ -86,7 +86,7 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        LoveDTO result = userResponseAggregateCommandResourceApi.loveCommittedActivityUsingPOST(loveDTO).getBody();
+        LoveDTO result = userResponseAggregateCommandResourceApi.doLoveUsingPOST(loveDTO).getBody();
         
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
     }
@@ -123,7 +123,7 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        CommentDTO commentDto = userResponseAggregateCommandResourceApi.saveCommentUsingPOST(commentDTO).getBody();
+        CommentDTO commentDto = userResponseAggregateCommandResourceApi.doCommentUsingPOST(commentDTO).getBody();
         
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, commentDto.toString())).build();
     }
@@ -143,7 +143,7 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new reply cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        ReplyDTO replyDto = userResponseAggregateCommandResourceApi.saveReplyUsingPOST(replyDTO).getBody();
+        ReplyDTO replyDto = userResponseAggregateCommandResourceApi.doReplyUsingPOST(replyDTO).getBody();
         
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, replyDto.toString())).build();
     }  

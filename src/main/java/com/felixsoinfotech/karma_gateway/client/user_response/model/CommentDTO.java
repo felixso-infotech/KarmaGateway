@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * CommentDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-01T12:34:28.420822900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:50:57.134490600+05:30[Asia/Calcutta]")
 
 public class CommentDTO   {
   @JsonProperty("commitedActivityId")

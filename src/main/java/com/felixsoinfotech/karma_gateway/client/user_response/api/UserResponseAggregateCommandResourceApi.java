@@ -28,7 +28,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-01T12:34:28.420822900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:50:57.134490600+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateCommandResource", description = "the UserResponseAggregateCommandResource API")
 public interface UserResponseAggregateCommandResourceApi {
@@ -55,21 +55,7 @@ public interface UserResponseAggregateCommandResourceApi {
     ResponseEntity<Void> deleteReplyUsingDELETE1(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "loveCommittedActivity", nickname = "loveCommittedActivityUsingPOST", notes = "", response = LoveDTO.class, tags={ "user-response-aggregate-command-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = LoveDTO.class),
-        @ApiResponse(code = 201, message = "Created"),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/command/love-committedactivity",
-        produces = "*/*", 
-        consumes = "application/json",
-        method = RequestMethod.POST)
-    ResponseEntity<LoveDTO> loveCommittedActivityUsingPOST(@ApiParam(value = "loveDTO" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
-
-
-    @ApiOperation(value = "saveComment", nickname = "saveCommentUsingPOST", notes = "", response = CommentDTO.class, tags={ "user-response-aggregate-command-resource", })
+    @ApiOperation(value = "doComment", nickname = "doCommentUsingPOST", notes = "", response = CommentDTO.class, tags={ "user-response-aggregate-command-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = CommentDTO.class),
         @ApiResponse(code = 201, message = "Created"),
@@ -80,10 +66,24 @@ public interface UserResponseAggregateCommandResourceApi {
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<CommentDTO> saveCommentUsingPOST(@ApiParam(value = "commentDTO" ,required=true )  @Valid @RequestBody CommentDTO commentDTO);
+    ResponseEntity<CommentDTO> doCommentUsingPOST(@ApiParam(value = "commentDTO" ,required=true )  @Valid @RequestBody CommentDTO commentDTO);
 
 
-    @ApiOperation(value = "saveReply", nickname = "saveReplyUsingPOST", notes = "", response = ReplyDTO.class, tags={ "user-response-aggregate-command-resource", })
+    @ApiOperation(value = "doLove", nickname = "doLoveUsingPOST", notes = "", response = LoveDTO.class, tags={ "user-response-aggregate-command-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = LoveDTO.class),
+        @ApiResponse(code = 201, message = "Created"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/command/save-love",
+        produces = "*/*", 
+        consumes = "application/json",
+        method = RequestMethod.POST)
+    ResponseEntity<LoveDTO> doLoveUsingPOST(@ApiParam(value = "loveDTO" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
+
+
+    @ApiOperation(value = "doReply", nickname = "doReplyUsingPOST", notes = "", response = ReplyDTO.class, tags={ "user-response-aggregate-command-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ReplyDTO.class),
         @ApiResponse(code = 201, message = "Created"),
@@ -94,7 +94,7 @@ public interface UserResponseAggregateCommandResourceApi {
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<ReplyDTO> saveReplyUsingPOST(@ApiParam(value = "replyDTO" ,required=true )  @Valid @RequestBody ReplyDTO replyDTO);
+    ResponseEntity<ReplyDTO> doReplyUsingPOST(@ApiParam(value = "replyDTO" ,required=true )  @Valid @RequestBody ReplyDTO replyDTO);
 
 
     @ApiOperation(value = "unloveCommittedActivity", nickname = "unloveCommittedActivityUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })

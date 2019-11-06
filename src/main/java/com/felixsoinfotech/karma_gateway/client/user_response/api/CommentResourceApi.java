@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-01T12:34:28.420822900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:50:57.134490600+05:30[Asia/Calcutta]")
 
 @Api(value = "CommentResource", description = "the CommentResource API")
 public interface CommentResourceApi {
