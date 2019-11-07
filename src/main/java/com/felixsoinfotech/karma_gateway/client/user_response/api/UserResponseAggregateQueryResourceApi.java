@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:50:57.134490600+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-07T12:06:16.399656100+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateQueryResource", description = "the UserResponseAggregateQueryResource API")
 public interface UserResponseAggregateQueryResourceApi {
@@ -126,5 +126,17 @@ public interface UserResponseAggregateQueryResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<Long> getNumberOfRepliesByCommentIdUsingGET(@ApiParam(value = "commentId",required=true) @PathVariable("commentId") Long commentId);
+
+
+    @ApiOperation(value = "isLikedCommittedActivityByUser", nickname = "isLikedCommittedActivityByUserUsingGET", notes = "", response = Boolean.class, tags={ "user-response-aggregate-query-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = Boolean.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/query/isLiked/{commitedActivityId}/{userId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<Boolean> isLikedCommittedActivityByUserUsingGET(@ApiParam(value = "commitedActivityId",required=true) @PathVariable("commitedActivityId") Long commitedActivityId,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 }

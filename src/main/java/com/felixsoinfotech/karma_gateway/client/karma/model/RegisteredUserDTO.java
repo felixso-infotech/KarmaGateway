@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * RegisteredUserDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:27:44.546231800+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-07T12:06:05.138770+05:30[Asia/Calcutta]")
 
 public class RegisteredUserDTO   {
   @JsonProperty("coverPhoto")

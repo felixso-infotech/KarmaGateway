@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  * CommittedActivityAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-06T16:27:44.546231800+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-07T12:06:05.138770+05:30[Asia/Calcutta]")
 
 public class CommittedActivityAggregate   {
   @JsonProperty("activityCreatedDate")
@@ -54,6 +54,9 @@ public class CommittedActivityAggregate   {
 
   @JsonProperty("lastName")
   private String lastName = null;
+
+  @JsonProperty("liked")
+  private Boolean liked = null;
 
   @JsonProperty("likedUserPhotos")
   @Valid
@@ -400,6 +403,26 @@ public class CommittedActivityAggregate   {
     this.lastName = lastName;
   }
 
+  public CommittedActivityAggregate liked(Boolean liked) {
+    this.liked = liked;
+    return this;
+  }
+
+  /**
+   * Get liked
+   * @return liked
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Boolean isLiked() {
+    return liked;
+  }
+
+  public void setLiked(Boolean liked) {
+    this.liked = liked;
+  }
+
   public CommittedActivityAggregate likedUserPhotos(List<String> likedUserPhotos) {
     this.likedUserPhotos = likedUserPhotos;
     return this;
@@ -709,6 +732,7 @@ public class CommittedActivityAggregate   {
         Objects.equals(this.imageString, committedActivityAggregate.imageString) &&
         Objects.equals(this.imageStringContentType, committedActivityAggregate.imageStringContentType) &&
         Objects.equals(this.lastName, committedActivityAggregate.lastName) &&
+        Objects.equals(this.liked, committedActivityAggregate.liked) &&
         Objects.equals(this.likedUserPhotos, committedActivityAggregate.likedUserPhotos) &&
         Objects.equals(this.noOfComments, committedActivityAggregate.noOfComments) &&
         Objects.equals(this.noOfLoves, committedActivityAggregate.noOfLoves) &&
@@ -727,7 +751,7 @@ public class CommittedActivityAggregate   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityCreatedDate, activityDescription, activityId, challengeId, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, imageStringContentType, lastName, likedUserPhotos, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, successMessage, timeElapsed, title, type, userId, videoString, videoStringContentType);
+    return Objects.hash(activityCreatedDate, activityDescription, activityId, challengeId, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, imageStringContentType, lastName, liked, likedUserPhotos, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, successMessage, timeElapsed, title, type, userId, videoString, videoStringContentType);
   }
 
   @Override
@@ -746,6 +770,7 @@ public class CommittedActivityAggregate   {
     sb.append("    imageString: ").append(toIndentedString(imageString)).append("\n");
     sb.append("    imageStringContentType: ").append(toIndentedString(imageStringContentType)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    liked: ").append(toIndentedString(liked)).append("\n");
     sb.append("    likedUserPhotos: ").append(toIndentedString(likedUserPhotos)).append("\n");
     sb.append("    noOfComments: ").append(toIndentedString(noOfComments)).append("\n");
     sb.append("    noOfLoves: ").append(toIndentedString(noOfLoves)).append("\n");
