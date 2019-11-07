@@ -86,12 +86,12 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
 		  for(CommittedActivityAggregate committedActivityAggregate:committedActivityAggregateList) {
 		      
 			  if(committedActivityAggregate != null) {
-		           if(committedActivityAggregate.getCommittedActivityId() != null && committedActivityAggregate.getUserId() !=null ) {
+		           if(committedActivityAggregate.getCommittedActivityId() != null ) {
 		        	        
 		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
 		               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
-		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(), committedActivityAggregate.getUserId()).getBody());
+		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),"Sharai").getBody());
 		  
 		  } } }
 		  
