@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO;
@@ -46,19 +45,19 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.DeleteLoveMo
 import com.felixsoinfotech.karma_gateway.client.user_response.model.LoveDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyDTO;
 import com.felixsoinfotech.karma_gateway.web.rest.errors.BadRequestAlertException;
-import com.felixsoinfotech.karma_gateway.web.rest.util.HeaderUtil;
 
 
 /**
  * REST controller for managing Command resources.
- */  
+ */
 @RestController
 @RequestMapping("/api/command")
 public class GatewayAggregateCommandResource {
-	
-	private final Logger log =  LoggerFactory.getLogger(GatewayAggregateCommandResource.class);
-	
+
+	private final Logger log = LoggerFactory.getLogger(GatewayAggregateCommandResource.class);
+
 	private static final String ENTITY_NAME = "GatewayAggregateCommandResource";
+
 	  
     private AggregateCommandResourceApi aggregateCommandResourceApi;
     
@@ -286,5 +285,5 @@ public class GatewayAggregateCommandResource {
         
     }
 
-
+	
 }
