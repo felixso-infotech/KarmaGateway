@@ -86,9 +86,9 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        LoveDTO result = userResponseAggregateCommandResourceApi.doLoveUsingPOST(loveDTO).getBody();
+         return userResponseAggregateCommandResourceApi.doLoveUsingPOST(loveDTO);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
+        
     }
     
     /**
@@ -102,9 +102,8 @@ public class GatewayAggregateCommandResource {
     public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
         log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
         
-        userResponseAggregateCommandResourceApi.unloveCommittedActivityUsingDELETE(deleteLoveModel).getBody();
+        return userResponseAggregateCommandResourceApi.unloveCommittedActivityUsingDELETE(deleteLoveModel);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deleteLoveModel.toString())).build();
     }
     
     
@@ -123,9 +122,9 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new comment cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        CommentDTO commentDto = userResponseAggregateCommandResourceApi.doCommentUsingPOST(commentDTO).getBody();
+        return userResponseAggregateCommandResourceApi.doCommentUsingPOST(commentDTO);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, commentDto.toString())).build();
+        
     }
     
     /**
@@ -143,9 +142,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new reply cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        ReplyDTO replyDto = userResponseAggregateCommandResourceApi.doReplyUsingPOST(replyDTO).getBody();
+        return userResponseAggregateCommandResourceApi.doReplyUsingPOST(replyDTO);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, replyDto.toString())).build();
     }  
     
     
@@ -164,9 +162,9 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new activity cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        ActivityAggregate result = aggregateCommandResourceApi.createActivityUsingPOST1(activityAggregate).getBody();
+        return aggregateCommandResourceApi.createActivityUsingPOST1(activityAggregate);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
+        
     }
 	
 	   	
@@ -187,9 +185,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        ActivityAggregate result = aggregateCommandResourceApi.updateActivityUsingPUT1(activityAggregate).getBody();
+        return aggregateCommandResourceApi.updateActivityUsingPUT1(activityAggregate);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, result.toString())).build();
     }  
 
 
@@ -208,9 +205,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new committedActivity cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        CommittedActivityDTO committedActivityDto = aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityDTO).getBody();
+        return aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityDTO);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, committedActivityDto.toString())).build();
     }
     
     /**
@@ -230,11 +226,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        CommittedActivityDTO committedActivityDto = aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityDTO).getBody();
-        
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, committedActivityDto.toString())).build();
-        
-        
+        return aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityDTO);
+ 
     }
     
     /**
@@ -252,10 +245,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("A new registeredUser cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        RegisteredUserDTO registeredUserDto = aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO).getBody();
-        
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, registeredUserDto.toString())).build();
-              
+        return aggregateCommandResourceApi.createRegisteredUserUsingPOST(registeredUserDTO);
+       
     }
     
     /**
@@ -275,9 +266,8 @@ public class GatewayAggregateCommandResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        RegisteredUserDTO registeredUserDto = aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO).getBody();
+        return aggregateCommandResourceApi.updateRegisteredUserUsingPUT(registeredUserDTO);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, registeredUserDto.toString())).build();
     }
     
     /**
@@ -291,9 +281,9 @@ public class GatewayAggregateCommandResource {
     public ResponseEntity<Void> deleteRegisteredUser(@PathVariable Long id) {
         log.debug("REST request to delete RegisteredUser : {}", id);
         
-        aggregateCommandResourceApi.deleteRegisteredUserUsingDELETE(id).getBody();
+        return aggregateCommandResourceApi.deleteRegisteredUserUsingDELETE(id);
         
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        
     }
 
 

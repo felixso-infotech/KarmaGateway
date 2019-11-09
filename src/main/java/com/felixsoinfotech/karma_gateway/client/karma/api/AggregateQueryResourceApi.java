@@ -6,6 +6,7 @@
 package com.felixsoinfotech.karma_gateway.client.karma.api;
 
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
+import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.DimensionDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggregate;
@@ -28,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-07T12:06:05.138770+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-08T16:41:32.121453300+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateQueryResource", description = "the AggregateQueryResource API")
 public interface AggregateQueryResourceApi {
@@ -43,6 +44,18 @@ public interface AggregateQueryResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<ActivityDTO>> getAllActivitiesUsingGET1(@ApiParam(value = "eagerload", defaultValue = "false") @Valid @RequestParam(value = "eagerload", required = false, defaultValue="false") Boolean eagerload,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+
+    @ApiOperation(value = "getAllChallenges", nickname = "getAllChallengesUsingGET", notes = "", response = ChallengeDTO.class, responseContainer = "List", tags={ "aggregate-query-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = ChallengeDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/query/challenges",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<ChallengeDTO>> getAllChallengesUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
 
     @ApiOperation(value = "getAllCommittedActivitiesByStatus", nickname = "getAllCommittedActivitiesByStatusUsingGET", notes = "", response = CommittedActivityAggregate.class, responseContainer = "List", tags={ "aggregate-query-resource", })

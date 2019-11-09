@@ -21,9 +21,9 @@ import java.util.List;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
@@ -33,6 +33,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
+import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.DimensionDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggregate;
@@ -108,9 +109,9 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      public ResponseEntity<List<DimensionDTO>> getAllDimensions() {
          log.debug("REST request to get a list of Dimensions");
          
-         List<DimensionDTO> dimensionList = aggregateQueryResourceApi.getAllDimensionsUsingGET(null, null, null, null, null, null, null, null, null, null).getBody();
+         return aggregateQueryResourceApi.getAllDimensionsUsingGET(null, null, null, null, null, null, null, null, null, null);
          
-         return ResponseEntity.ok().body(dimensionList); }
+          }
      
      /**
       * GET  /registered-users/:id : get the "id" registeredUser.
@@ -123,10 +124,9 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      public ResponseEntity<RegisteredUserAggregate> getRegisteredUserByUserId(@PathVariable String userId) {
          log.debug("REST request to get RegisteredUser : {}", userId);
          
-         RegisteredUserAggregate registeredUserAggregate = aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(userId).getBody();
+         return aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(userId);
         		 
-         return ResponseEntity.ok().body(registeredUserAggregate);
-     }
+         }
      
      /**
       * GET  /activities : get all the activities.
@@ -140,9 +140,8 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      public ResponseEntity<List<ActivityDTO>> getAllActivities() {
          log.debug("REST request to get CommittedActivity : {}");
          
-         List<ActivityDTO> activities = aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null, null).getBody();
-         
-         return ResponseEntity.ok().body(activities);
+         return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null, null);
+        
      }
      
      /**
@@ -173,9 +172,8 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      	
          log.debug("REST request to get a enum Types");
                         
-         List<String> types = aggregateQueryResourceApi.getAllEnumTypesUsingGET(null, null, null, null, null, null, null, null, null, null).getBody();       
+         return aggregateQueryResourceApi.getAllEnumTypesUsingGET(null, null, null, null, null, null, null, null, null, null);       
        
-         return ResponseEntity.ok().body(types);
      }
      
      /**
@@ -189,10 +187,26 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      	
          log.debug("REST request to get a enum Types");
                         
-         List<String> status = aggregateQueryResourceApi.getAllEnumStatusUsingGET(null, null, null, null, null, null, null, null, null, null).getBody();      
+         return aggregateQueryResourceApi.getAllEnumStatusUsingGET(null, null, null, null, null, null, null, null, null, null);      
        
-         return ResponseEntity.ok().body(status);
          
+     }
+     
+     /**
+      * GET  /challenges : get all the challenges.
+      *
+      * @param pageable the pagination information
+      * @return the ResponseEntity with status 200 (OK) and the list of challenges in body
+      */
+     @GetMapping("/challenges")
+     @Timed
+     public ResponseEntity<List<ChallengeDTO>> getAllChallenges(Pageable pageable) {
+         log.debug("REST request to get a page of Challenges");
+         
+         return aggregateQueryResourceApi.getAllChallengesUsingGET(null, null, null, null, null, null, null, null, null, null);
+        
+         
+     
      }
      
      

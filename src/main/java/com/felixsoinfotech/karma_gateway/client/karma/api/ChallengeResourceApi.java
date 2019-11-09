@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-07T12:06:05.138770+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-08T16:41:32.121453300+05:30[Asia/Calcutta]")
 
 @Api(value = "ChallengeResource", description = "the ChallengeResource API")
 public interface ChallengeResourceApi {
@@ -55,7 +55,7 @@ public interface ChallengeResourceApi {
     ResponseEntity<Void> deleteChallengeUsingDELETE(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
 
 
-    @ApiOperation(value = "getAllChallenges", nickname = "getAllChallengesUsingGET", notes = "", response = ChallengeDTO.class, responseContainer = "List", tags={ "challenge-resource", })
+    @ApiOperation(value = "getAllChallenges", nickname = "getAllChallengesUsingGET1", notes = "", response = ChallengeDTO.class, responseContainer = "List", tags={ "challenge-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = ChallengeDTO.class, responseContainer = "List"),
         @ApiResponse(code = 401, message = "Unauthorized"),
@@ -64,7 +64,7 @@ public interface ChallengeResourceApi {
     @RequestMapping(value = "/api/challenges",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<List<ChallengeDTO>> getAllChallengesUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+    ResponseEntity<List<ChallengeDTO>> getAllChallengesUsingGET1(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
 
     @ApiOperation(value = "getChallenge", nickname = "getChallengeUsingGET", notes = "", response = ChallengeDTO.class, tags={ "challenge-resource", })
