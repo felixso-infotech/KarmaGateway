@@ -38,7 +38,9 @@ import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAgg
 import com.felixsoinfotech.karma_gateway.client.karma.model.DimensionDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateQueryResourceApi;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate;
+
 
   
   /**
@@ -203,13 +205,49 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      public ResponseEntity<List<ChallengeDTO>> getAllChallenges(Pageable pageable) {
          log.debug("REST request to get a page of Challenges");
          
-         return aggregateQueryResourceApi.getAllChallengesUsingGET(null, null, null, null, null, null, null, null, null, null);
-        
-         
+         return aggregateQueryResourceApi.getAllChallengesUsingGET(null, null, null, null, null, null, null, null, null, null);       
      
      }
      
-     
+     /**
+ 	 * GET /comments : get all the comments by commitedActivityId.
+ 	 *
+ 	 * @param commitedActivityId
+ 	 *            the activity id to retrieve comments,pageable the pagination
+ 	 *            information
+ 	 * @return the ResponseEntity with status 200 (OK) and the list of comments
+ 	 *         in body
+ 	 */
+ 	@GetMapping("/get-comments/{commitedActivityId}")
+ 	@Timed
+ 	public ResponseEntity<List<CommentAggregate>> getAllCommentsByCommitedActivityId(Pageable pageable,@PathVariable Long commitedActivityId) {
+ 		
+ 		log.debug("REST request to get a page of Comments by commitedActivityId");
+ 		 		
+ 		List<CommentAggregate> CommentAggregateList =userResponseAggregateQueryResourceApi.getAllCommentsByCommitedActivityIdUsingGET(commitedActivityId, commitedActivityId, null, null, null, null, null, null, null, null, null).getBody();
+        
+ 		RegisteredUserAggregate registeredUserAggregate=null;
+ 		
+ 		for(CommentAggregate commentAggregate : CommentAggregateList )
+ 		{
+ 			if(commentAggregate != null)
+ 			{
+ 				if(commentAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(commentAggregate.getUserId()).getBody();
+ 				
+ 				if(registeredUserAggregate != null)
+ 				{
+ 				commentAggregate.setFirstName(registeredUserAggregate.getFirstName());
+ 				commentAggregate.setLastName(registeredUserAggregate.getLastName());
+ 				commentAggregate.setProfilePicture(registeredUserAggregate.getProfilePicture());
+ 				commentAggregate.setProfilePictureContentType(registeredUserAggregate.getProfilePictureContentType());
+ 				}
+ 				
+ 			}
+ 		}
+        
+ 		return ResponseEntity.ok().body(CommentAggregateList);
 		  
      }
+  }
 		 
