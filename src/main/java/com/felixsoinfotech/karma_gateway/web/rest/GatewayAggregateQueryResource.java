@@ -21,9 +21,7 @@ import java.util.List;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
@@ -31,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;  
 import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi;
-import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
@@ -40,6 +37,7 @@ import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggreg
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateQueryResourceApi;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate;
+import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
 
 
   
@@ -62,11 +60,15 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
      private AggregateQueryResourceApi aggregateQueryResourceApi;
      
      private UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi;
+     
+     private GatewayAggregateQueryService gatewayAggregateQueryService;
    
      public GatewayAggregateQueryResource(AggregateQueryResourceApi aggregateQueryResourceApi,
-    		                              UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi){
+    		                              UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi,
+    		                              GatewayAggregateQueryService gatewayAggregateQueryService){
                        this.aggregateQueryResourceApi=aggregateQueryResourceApi; 
                        this.userResponseAggregateQueryResourceApi=userResponseAggregateQueryResourceApi;
+                       this.gatewayAggregateQueryService=gatewayAggregateQueryService;
       }
   
    /**
@@ -242,6 +244,9 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
  				commentAggregate.setProfilePicture(registeredUserAggregate.getProfilePicture());
  				commentAggregate.setProfilePictureContentType(registeredUserAggregate.getProfilePictureContentType());
  				}
+ 				
+ 				if(commentAggregate.getCreatedDate() != null)
+ 				commentAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(commentAggregate.getCreatedDate().toZonedDateTime()));
  				
  			}
  		}
