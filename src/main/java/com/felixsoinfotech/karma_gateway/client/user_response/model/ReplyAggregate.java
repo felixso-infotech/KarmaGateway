@@ -11,23 +11,17 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * CommentAggregate
+ * ReplyAggregate
  */
 @Validated
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T10:30:57.787246900+05:30[Asia/Calcutta]")
 
-public class CommentAggregate   {
+public class ReplyAggregate   {
   @JsonProperty("commentId")
   private Long commentId = null;
 
-  @JsonProperty("commitedActivityId")
-  private Long commitedActivityId = null;
-
-  @JsonProperty("completedChallengeId")
-  private Long completedChallengeId = null;
-
-  @JsonProperty("createdDate")
-  private OffsetDateTime createdDate = null;
+  @JsonProperty("dateAndTime")
+  private OffsetDateTime dateAndTime = null;
 
   @JsonProperty("description")
   private String description = null;
@@ -44,14 +38,14 @@ public class CommentAggregate   {
   @JsonProperty("noOfLoves")
   private Long noOfLoves = null;
 
-  @JsonProperty("noOfReplies")
-  private Long noOfReplies = null;
-
   @JsonProperty("profilePicture")
   private String profilePicture = null;
 
   @JsonProperty("profilePictureContentType")
   private String profilePictureContentType = null;
+
+  @JsonProperty("replyId")
+  private Long replyId = null;
 
   @JsonProperty("timeElapsed")
   private String timeElapsed = null;
@@ -59,7 +53,7 @@ public class CommentAggregate   {
   @JsonProperty("userId")
   private String userId = null;
 
-  public CommentAggregate commentId(Long commentId) {
+  public ReplyAggregate commentId(Long commentId) {
     this.commentId = commentId;
     return this;
   }
@@ -79,68 +73,28 @@ public class CommentAggregate   {
     this.commentId = commentId;
   }
 
-  public CommentAggregate commitedActivityId(Long commitedActivityId) {
-    this.commitedActivityId = commitedActivityId;
+  public ReplyAggregate dateAndTime(OffsetDateTime dateAndTime) {
+    this.dateAndTime = dateAndTime;
     return this;
   }
 
   /**
-   * Get commitedActivityId
-   * @return commitedActivityId
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getCommitedActivityId() {
-    return commitedActivityId;
-  }
-
-  public void setCommitedActivityId(Long commitedActivityId) {
-    this.commitedActivityId = commitedActivityId;
-  }
-
-  public CommentAggregate completedChallengeId(Long completedChallengeId) {
-    this.completedChallengeId = completedChallengeId;
-    return this;
-  }
-
-  /**
-   * Get completedChallengeId
-   * @return completedChallengeId
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getCompletedChallengeId() {
-    return completedChallengeId;
-  }
-
-  public void setCompletedChallengeId(Long completedChallengeId) {
-    this.completedChallengeId = completedChallengeId;
-  }
-
-  public CommentAggregate createdDate(OffsetDateTime createdDate) {
-    this.createdDate = createdDate;
-    return this;
-  }
-
-  /**
-   * Get createdDate
-   * @return createdDate
+   * Get dateAndTime
+   * @return dateAndTime
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public OffsetDateTime getCreatedDate() {
-    return createdDate;
+  public OffsetDateTime getDateAndTime() {
+    return dateAndTime;
   }
 
-  public void setCreatedDate(OffsetDateTime createdDate) {
-    this.createdDate = createdDate;
+  public void setDateAndTime(OffsetDateTime dateAndTime) {
+    this.dateAndTime = dateAndTime;
   }
 
-  public CommentAggregate description(String description) {
+  public ReplyAggregate description(String description) {
     this.description = description;
     return this;
   }
@@ -160,7 +114,7 @@ public class CommentAggregate   {
     this.description = description;
   }
 
-  public CommentAggregate firstName(String firstName) {
+  public ReplyAggregate firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -180,7 +134,7 @@ public class CommentAggregate   {
     this.firstName = firstName;
   }
 
-  public CommentAggregate lastName(String lastName) {
+  public ReplyAggregate lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -200,7 +154,7 @@ public class CommentAggregate   {
     this.lastName = lastName;
   }
 
-  public CommentAggregate liked(Boolean liked) {
+  public ReplyAggregate liked(Boolean liked) {
     this.liked = liked;
     return this;
   }
@@ -220,7 +174,7 @@ public class CommentAggregate   {
     this.liked = liked;
   }
 
-  public CommentAggregate noOfLoves(Long noOfLoves) {
+  public ReplyAggregate noOfLoves(Long noOfLoves) {
     this.noOfLoves = noOfLoves;
     return this;
   }
@@ -240,27 +194,7 @@ public class CommentAggregate   {
     this.noOfLoves = noOfLoves;
   }
 
-  public CommentAggregate noOfReplies(Long noOfReplies) {
-    this.noOfReplies = noOfReplies;
-    return this;
-  }
-
-  /**
-   * Get noOfReplies
-   * @return noOfReplies
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getNoOfReplies() {
-    return noOfReplies;
-  }
-
-  public void setNoOfReplies(Long noOfReplies) {
-    this.noOfReplies = noOfReplies;
-  }
-
-  public CommentAggregate profilePicture(String profilePicture) {
+  public ReplyAggregate profilePicture(String profilePicture) {
     this.profilePicture = profilePicture;
     return this;
   }
@@ -280,7 +214,7 @@ public class CommentAggregate   {
     this.profilePicture = profilePicture;
   }
 
-  public CommentAggregate profilePictureContentType(String profilePictureContentType) {
+  public ReplyAggregate profilePictureContentType(String profilePictureContentType) {
     this.profilePictureContentType = profilePictureContentType;
     return this;
   }
@@ -300,7 +234,27 @@ public class CommentAggregate   {
     this.profilePictureContentType = profilePictureContentType;
   }
 
-  public CommentAggregate timeElapsed(String timeElapsed) {
+  public ReplyAggregate replyId(Long replyId) {
+    this.replyId = replyId;
+    return this;
+  }
+
+  /**
+   * Get replyId
+   * @return replyId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Long getReplyId() {
+    return replyId;
+  }
+
+  public void setReplyId(Long replyId) {
+    this.replyId = replyId;
+  }
+
+  public ReplyAggregate timeElapsed(String timeElapsed) {
     this.timeElapsed = timeElapsed;
     return this;
   }
@@ -320,7 +274,7 @@ public class CommentAggregate   {
     this.timeElapsed = timeElapsed;
   }
 
-  public CommentAggregate userId(String userId) {
+  public ReplyAggregate userId(String userId) {
     this.userId = userId;
     return this;
   }
@@ -349,45 +303,41 @@ public class CommentAggregate   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CommentAggregate commentAggregate = (CommentAggregate) o;
-    return Objects.equals(this.commentId, commentAggregate.commentId) &&
-        Objects.equals(this.commitedActivityId, commentAggregate.commitedActivityId) &&
-        Objects.equals(this.completedChallengeId, commentAggregate.completedChallengeId) &&
-        Objects.equals(this.createdDate, commentAggregate.createdDate) &&
-        Objects.equals(this.description, commentAggregate.description) &&
-        Objects.equals(this.firstName, commentAggregate.firstName) &&
-        Objects.equals(this.lastName, commentAggregate.lastName) &&
-        Objects.equals(this.liked, commentAggregate.liked) &&
-        Objects.equals(this.noOfLoves, commentAggregate.noOfLoves) &&
-        Objects.equals(this.noOfReplies, commentAggregate.noOfReplies) &&
-        Objects.equals(this.profilePicture, commentAggregate.profilePicture) &&
-        Objects.equals(this.profilePictureContentType, commentAggregate.profilePictureContentType) &&
-        Objects.equals(this.timeElapsed, commentAggregate.timeElapsed) &&
-        Objects.equals(this.userId, commentAggregate.userId);
+    ReplyAggregate replyAggregate = (ReplyAggregate) o;
+    return Objects.equals(this.commentId, replyAggregate.commentId) &&
+        Objects.equals(this.dateAndTime, replyAggregate.dateAndTime) &&
+        Objects.equals(this.description, replyAggregate.description) &&
+        Objects.equals(this.firstName, replyAggregate.firstName) &&
+        Objects.equals(this.lastName, replyAggregate.lastName) &&
+        Objects.equals(this.liked, replyAggregate.liked) &&
+        Objects.equals(this.noOfLoves, replyAggregate.noOfLoves) &&
+        Objects.equals(this.profilePicture, replyAggregate.profilePicture) &&
+        Objects.equals(this.profilePictureContentType, replyAggregate.profilePictureContentType) &&
+        Objects.equals(this.replyId, replyAggregate.replyId) &&
+        Objects.equals(this.timeElapsed, replyAggregate.timeElapsed) &&
+        Objects.equals(this.userId, replyAggregate.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(commentId, commitedActivityId, completedChallengeId, createdDate, description, firstName, lastName, liked, noOfLoves, noOfReplies, profilePicture, profilePictureContentType, timeElapsed, userId);
+    return Objects.hash(commentId, dateAndTime, description, firstName, lastName, liked, noOfLoves, profilePicture, profilePictureContentType, replyId, timeElapsed, userId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CommentAggregate {\n");
+    sb.append("class ReplyAggregate {\n");
     
     sb.append("    commentId: ").append(toIndentedString(commentId)).append("\n");
-    sb.append("    commitedActivityId: ").append(toIndentedString(commitedActivityId)).append("\n");
-    sb.append("    completedChallengeId: ").append(toIndentedString(completedChallengeId)).append("\n");
-    sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
+    sb.append("    dateAndTime: ").append(toIndentedString(dateAndTime)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    liked: ").append(toIndentedString(liked)).append("\n");
     sb.append("    noOfLoves: ").append(toIndentedString(noOfLoves)).append("\n");
-    sb.append("    noOfReplies: ").append(toIndentedString(noOfReplies)).append("\n");
     sb.append("    profilePicture: ").append(toIndentedString(profilePicture)).append("\n");
     sb.append("    profilePictureContentType: ").append(toIndentedString(profilePictureContentType)).append("\n");
+    sb.append("    replyId: ").append(toIndentedString(replyId)).append("\n");
     sb.append("    timeElapsed: ").append(toIndentedString(timeElapsed)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");

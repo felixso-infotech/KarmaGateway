@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
@@ -37,7 +39,9 @@ import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggreg
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateQueryResourceApi;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate;
+import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggregate;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
+
 
 
   
@@ -254,5 +258,65 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
  		return ResponseEntity.ok().body(CommentAggregateList);
 		  
      }
+ 	
+ 	/**
+     * GET  /replies : get all the replies by commentId.
+     *
+     * @param commentId the commentId to retrieve replies,pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of replies in body
+     */
+    @GetMapping("/get-replies/{commentId}")
+    @Timed
+    public ResponseEntity<List<ReplyAggregate>> getAllRepliesByCommentId(Pageable pageable,@PathVariable Long commentId) {
+        log.debug("REST request to get a page of Replies by commentId");
+        
+        List<ReplyAggregate> replyAggregateList = userResponseAggregateQueryResourceApi.getAllRepliesByCommentIdUsingGET(commentId, commentId, null, null, null, null, null, null, null, null, null).getBody();
+        
+        RegisteredUserAggregate registeredUserAggregate=null;
+        
+        for(ReplyAggregate replyAggregate : replyAggregateList )
+ 		{
+ 			if(replyAggregate != null)
+ 			{
+ 				if(replyAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(replyAggregate.getUserId()).getBody();
+ 				
+ 				if(registeredUserAggregate != null)
+ 				{
+ 					replyAggregate.setFirstName(registeredUserAggregate.getFirstName());
+ 					replyAggregate.setLastName(registeredUserAggregate.getLastName());
+ 					replyAggregate.setProfilePicture(registeredUserAggregate.getProfilePicture());
+ 					replyAggregate.setProfilePictureContentType(registeredUserAggregate.getProfilePictureContentType());
+ 				}
+ 				
+ 				if(replyAggregate.getDateAndTime() != null)
+ 					replyAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(replyAggregate.getDateAndTime().toZonedDateTime()));
+ 				
+ 			}
+ 		}        
+        
+        return ResponseEntity.ok().body(replyAggregateList); 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   }
 		 
