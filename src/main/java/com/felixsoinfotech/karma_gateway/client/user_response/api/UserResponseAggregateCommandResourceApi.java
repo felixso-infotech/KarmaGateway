@@ -6,7 +6,6 @@
 package com.felixsoinfotech.karma_gateway.client.user_response.api;
 
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentDTO;
-import com.felixsoinfotech.karma_gateway.client.user_response.model.DeleteLoveModel;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.LoveDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyDTO;
 import io.swagger.annotations.*;
@@ -28,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T10:30:57.787246900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T16:09:59.470589900+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateCommandResource", description = "the UserResponseAggregateCommandResource API")
 public interface UserResponseAggregateCommandResourceApi {
@@ -97,6 +96,17 @@ public interface UserResponseAggregateCommandResourceApi {
     ResponseEntity<ReplyDTO> doReplyUsingPOST(@ApiParam(value = "replyDTO" ,required=true )  @Valid @RequestBody ReplyDTO replyDTO);
 
 
+    @ApiOperation(value = "unloveComment", nickname = "unloveCommentUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 204, message = "No Content"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden") })
+    @RequestMapping(value = "/api/command/unlove-comment",
+        method = RequestMethod.DELETE)
+    ResponseEntity<Void> unloveCommentUsingDELETE(@ApiParam(value = "loveDto" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
+
+
     @ApiOperation(value = "unloveCommittedActivity", nickname = "unloveCommittedActivityUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK"),
@@ -105,6 +115,17 @@ public interface UserResponseAggregateCommandResourceApi {
         @ApiResponse(code = 403, message = "Forbidden") })
     @RequestMapping(value = "/api/command/unlove-committedactivity",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> unloveCommittedActivityUsingDELETE(@ApiParam(value = "deleteLoveModel" ,required=true )  @Valid @RequestBody DeleteLoveModel deleteLoveModel);
+    ResponseEntity<Void> unloveCommittedActivityUsingDELETE(@ApiParam(value = "loveDto" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
+
+
+    @ApiOperation(value = "unloveReply", nickname = "unloveReplyUsingDELETE", notes = "", tags={ "user-response-aggregate-command-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 204, message = "No Content"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden") })
+    @RequestMapping(value = "/api/command/unlove-reply",
+        method = RequestMethod.DELETE)
+    ResponseEntity<Void> unloveReplyUsingDELETE(@ApiParam(value = "loveDto" ,required=true )  @Valid @RequestBody LoveDTO loveDTO);
 
 }

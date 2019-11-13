@@ -41,7 +41,6 @@ import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentDTO;
-import com.felixsoinfotech.karma_gateway.client.user_response.model.DeleteLoveModel;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.LoveDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyDTO;
 import com.felixsoinfotech.karma_gateway.web.rest.errors.BadRequestAlertException;
@@ -79,7 +78,7 @@ public class GatewayAggregateCommandResource {
      */
     @PostMapping("/save-love")
     @Timed
-    public ResponseEntity<LoveDTO> loveCommittedActivity(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
+    public ResponseEntity<LoveDTO> doLove(@RequestBody LoveDTO loveDTO) throws URISyntaxException {
         log.debug("REST request to save Love : {}", loveDTO);
         if (loveDTO.getId() != null) {
             throw new BadRequestAlertException("A new love cannot already have an ID", ENTITY_NAME, "idexists");
@@ -98,10 +97,40 @@ public class GatewayAggregateCommandResource {
      */
     @DeleteMapping("/unlove-committedactivity")
     @Timed
-    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody DeleteLoveModel deleteLoveModel) {
-        log.debug("REST request to delete Love activity of the user : {}", deleteLoveModel);
+    public ResponseEntity<Void> unloveCommittedActivity(@RequestBody LoveDTO loveDTO) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDTO);
         
-        return userResponseAggregateCommandResourceApi.unloveCommittedActivityUsingDELETE(deleteLoveModel);
+        return userResponseAggregateCommandResourceApi.unloveCommittedActivityUsingDELETE(loveDTO);
+        
+    }
+    
+    /**
+     * DELETE  /loves : delete the loved activity of the user.
+     *
+     * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/unlove-committedactivity")
+    @Timed
+    public ResponseEntity<Void> unloveComment(@RequestBody LoveDTO loveDTO) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDTO);
+        
+        return userResponseAggregateCommandResourceApi.unloveCommentUsingDELETE(loveDTO);
+        
+    }
+    
+    /**
+     * DELETE  /loves : delete the loved activity of the user.
+     *
+     * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/unlove-committedactivity")
+    @Timed
+    public ResponseEntity<Void> unloveReply(@RequestBody LoveDTO loveDTO) {
+        log.debug("REST request to delete Love activity of the user : {}", loveDTO);
+        
+        return userResponseAggregateCommandResourceApi.unloveReplyUsingDELETE(loveDTO);
         
     }
     
