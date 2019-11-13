@@ -110,7 +110,7 @@ public class GatewayAggregateCommandResource {
      * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/unlove-committedactivity")
+    @DeleteMapping("/unlove-comment")
     @Timed
     public ResponseEntity<Void> unloveComment(@RequestBody LoveDTO loveDTO) {
         log.debug("REST request to delete Love activity of the user : {}", loveDTO);
@@ -125,7 +125,7 @@ public class GatewayAggregateCommandResource {
      * @param deleteLoveModel the deleteLoveModel of the loveDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/unlove-committedactivity")
+    @DeleteMapping("/unlove-reply")
     @Timed
     public ResponseEntity<Void> unloveReply(@RequestBody LoveDTO loveDTO) {
         log.debug("REST request to delete Love activity of the user : {}", loveDTO);
