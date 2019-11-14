@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * RegisteredUserAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T16:09:48.277015300+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-14T11:39:47.531112900+05:30[Asia/Calcutta]")
 
 public class RegisteredUserAggregate   {
   @JsonProperty("coverPhoto")
@@ -36,6 +36,9 @@ public class RegisteredUserAggregate   {
 
   @JsonProperty("noOfCompletedTasks")
   private Long noOfCompletedTasks = null;
+
+  @JsonProperty("noOfLoves")
+  private Long noOfLoves = null;
 
   @JsonProperty("profilePicture")
   private String profilePicture = null;
@@ -186,6 +189,26 @@ public class RegisteredUserAggregate   {
     this.noOfCompletedTasks = noOfCompletedTasks;
   }
 
+  public RegisteredUserAggregate noOfLoves(Long noOfLoves) {
+    this.noOfLoves = noOfLoves;
+    return this;
+  }
+
+  /**
+   * Get noOfLoves
+   * @return noOfLoves
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Long getNoOfLoves() {
+    return noOfLoves;
+  }
+
+  public void setNoOfLoves(Long noOfLoves) {
+    this.noOfLoves = noOfLoves;
+  }
+
   public RegisteredUserAggregate profilePicture(String profilePicture) {
     this.profilePicture = profilePicture;
     return this;
@@ -263,6 +286,7 @@ public class RegisteredUserAggregate   {
         Objects.equals(this.id, registeredUserAggregate.id) &&
         Objects.equals(this.lastName, registeredUserAggregate.lastName) &&
         Objects.equals(this.noOfCompletedTasks, registeredUserAggregate.noOfCompletedTasks) &&
+        Objects.equals(this.noOfLoves, registeredUserAggregate.noOfLoves) &&
         Objects.equals(this.profilePicture, registeredUserAggregate.profilePicture) &&
         Objects.equals(this.profilePictureContentType, registeredUserAggregate.profilePictureContentType) &&
         Objects.equals(this.userId, registeredUserAggregate.userId);
@@ -270,7 +294,7 @@ public class RegisteredUserAggregate   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(coverPhoto, coverPhotoContentType, email, firstName, id, lastName, noOfCompletedTasks, profilePicture, profilePictureContentType, userId);
+    return Objects.hash(coverPhoto, coverPhotoContentType, email, firstName, id, lastName, noOfCompletedTasks, noOfLoves, profilePicture, profilePictureContentType, userId);
   }
 
   @Override
@@ -285,6 +309,7 @@ public class RegisteredUserAggregate   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    noOfCompletedTasks: ").append(toIndentedString(noOfCompletedTasks)).append("\n");
+    sb.append("    noOfLoves: ").append(toIndentedString(noOfLoves)).append("\n");
     sb.append("    profilePicture: ").append(toIndentedString(profilePicture)).append("\n");
     sb.append("    profilePictureContentType: ").append(toIndentedString(profilePictureContentType)).append("\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");

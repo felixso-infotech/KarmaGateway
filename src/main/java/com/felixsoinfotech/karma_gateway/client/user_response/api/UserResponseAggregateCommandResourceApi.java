@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T16:09:59.470589900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-14T11:39:57.752418300+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateCommandResource", description = "the UserResponseAggregateCommandResource API")
 public interface UserResponseAggregateCommandResourceApi {

@@ -21,9 +21,7 @@ import java.util.List;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
@@ -85,7 +83,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
     
      @GetMapping("/committed-activities/{status}")
      @Timed 
-	 public ResponseEntity<List<CommittedActivityAggregate>> getAllCommittedActivitiesByStatus(@PathVariable String status) { 
+	 public ResponseEntity<List<CommittedActivityAggregate>> getAllCommittedActivitiesByStatus(Pageable pageable,@PathVariable String status) { 
 			  
     	  log.debug("REST request to get a list of CommittedActivity : {}", status);
 		  
@@ -107,6 +105,41 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
 		  return ResponseEntity.ok().body(committedActivityAggregateList); }
      
      /**
+ 	 * GET /committed-activities/:status/:registeredUserId : get the committedActivity of a specific user with a specific status.
+ 	 *
+ 	 * @param status the status of the committedActivityDTO to retrieve
+ 	 * @param status the id of the registered user of the committedActivityDTO to retrieve
+ 	 * @return the ResponseEntity with status 200 (OK) and with body the
+ 	 *         committedActivityDTO, or with status 404 (Not Found)
+ 	 */
+     
+      @GetMapping("/committed-activities/{status}/{registeredUserId}")
+      @Timed 
+ 	 public ResponseEntity<List<CommittedActivityAggregate>> getAllCommittedActivitiesByStatusAndRegisteredUserId(Pageable pageable,@PathVariable String status, @PathVariable Long registeredUserId) { 
+ 			  
+     	  log.debug("REST request to get a list of CommittedActivity : {}", status);
+ 		  
+ 		  List<CommittedActivityAggregate> committedActivityAggregateList = aggregateQueryResourceApi.getAllCommittedActivitiesByStatusAndRegisteredUserIdUsingGET(registeredUserId, status, null, null, null, null, null, null, null, null, null, null).getBody();
+ 		  
+ 		  for(CommittedActivityAggregate committedActivityAggregate:committedActivityAggregateList) {
+ 		      
+ 			  if(committedActivityAggregate != null) {
+ 		           if(committedActivityAggregate.getCommittedActivityId() != null ) {
+ 		        	        
+ 		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
+ 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
+					/*
+					 * committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
+					 * committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.
+					 * isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.
+					 * getCommittedActivityId(),"Sharai").getBody());
+					 */
+ 		  
+ 		  } } }
+ 		  
+ 		  return ResponseEntity.ok().body(committedActivityAggregateList); }
+     
+     /**
       * GET  /dimensions : get all the dimensions.
       *
       * @param pageable the pagination information
@@ -114,7 +147,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
       */
      @GetMapping("/dimensions")
      @Timed
-     public ResponseEntity<List<DimensionDTO>> getAllDimensions() {
+     public ResponseEntity<List<DimensionDTO>> getAllDimensions(Pageable pageable) {
          log.debug("REST request to get a list of Dimensions");
          
          return aggregateQueryResourceApi.getAllDimensionsUsingGET(null, null, null, null, null, null, null, null, null, null);
@@ -145,7 +178,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
       */
      @GetMapping("/activities")
      @Timed
-     public ResponseEntity<List<ActivityDTO>> getAllActivities() {
+     public ResponseEntity<List<ActivityDTO>> getAllActivities(Pageable pageable) {
          log.debug("REST request to get CommittedActivity : {}");
          
          return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null, null);
@@ -159,7 +192,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
       */
      @GetMapping("/enums/proof-type")
      @Timed
-     public ResponseEntity<List<String>> getAllEnumProofTypes() {
+     public ResponseEntity<List<String>> getAllEnumProofTypes(Pageable pageable) {
      	
      	
          log.debug("REST request to get a enum ProofType");
@@ -176,7 +209,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
       */
      @GetMapping("/enums/type")
      @Timed
-     public ResponseEntity<List<String>> getAllEnumTypes() {
+     public ResponseEntity<List<String>> getAllEnumTypes(Pageable pageable) {
      	
          log.debug("REST request to get a enum Types");
                         
@@ -191,7 +224,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
       */
      @GetMapping("/enums/status")
      @Timed
-     public ResponseEntity<List<String>> getAllEnumStatus() {
+     public ResponseEntity<List<String>> getAllEnumStatus(Pageable pageable) {
      	
          log.debug("REST request to get a enum Types");
                         

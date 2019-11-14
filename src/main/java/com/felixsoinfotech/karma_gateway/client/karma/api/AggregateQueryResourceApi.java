@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-13T16:09:48.277015300+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-14T11:39:47.531112900+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateQueryResource", description = "the AggregateQueryResource API")
 public interface AggregateQueryResourceApi {
@@ -56,6 +56,18 @@ public interface AggregateQueryResourceApi {
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<List<ChallengeDTO>> getAllChallengesUsingGET(@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
+
+
+    @ApiOperation(value = "getAllCommittedActivitiesByStatusAndRegisteredUserId", nickname = "getAllCommittedActivitiesByStatusAndRegisteredUserIdUsingGET", notes = "", response = CommittedActivityAggregate.class, responseContainer = "List", tags={ "aggregate-query-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = CommittedActivityAggregate.class, responseContainer = "List"),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/query/committed-activities/{status}/{registeredUserId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<List<CommittedActivityAggregate>> getAllCommittedActivitiesByStatusAndRegisteredUserIdUsingGET(@ApiParam(value = "registeredUserId",required=true) @PathVariable("registeredUserId") Long registeredUserId,@ApiParam(value = "status",required=true) @PathVariable("status") String status,@ApiParam(value = "") @Valid @RequestParam(value = "offset", required = false) Long offset,@ApiParam(value = "Page number of the requested page") @Valid @RequestParam(value = "page", required = false) Integer page,@ApiParam(value = "") @Valid @RequestParam(value = "pageNumber", required = false) Integer pageNumber,@ApiParam(value = "") @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,@ApiParam(value = "") @Valid @RequestParam(value = "paged", required = false) Boolean paged,@ApiParam(value = "Size of a page") @Valid @RequestParam(value = "size", required = false) Integer size,@ApiParam(value = "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.") @Valid @RequestParam(value = "sort", required = false) List<String> sort,@ApiParam(value = "") @Valid @RequestParam(value = "sort.sorted", required = false) Boolean sortSorted,@ApiParam(value = "") @Valid @RequestParam(value = "sort.unsorted", required = false) Boolean sortUnsorted,@ApiParam(value = "") @Valid @RequestParam(value = "unpaged", required = false) Boolean unpaged);
 
 
     @ApiOperation(value = "getAllCommittedActivitiesByStatus", nickname = "getAllCommittedActivitiesByStatusUsingGET", notes = "", response = CommittedActivityAggregate.class, responseContainer = "List", tags={ "aggregate-query-resource", })
