@@ -284,7 +284,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
  				
  				if(commentAggregate.getCreatedDate() != null)
  				commentAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(commentAggregate.getCreatedDate().toZonedDateTime()));
- 				
+ 				commentAggregate.setLiked(commentAggregate.isLiked());
  			}
  		}
         
@@ -325,6 +325,7 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
  				if(replyAggregate.getDateAndTime() != null)
  					replyAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(replyAggregate.getDateAndTime().toZonedDateTime()));
  				
+ 				replyAggregate.setLiked(replyAggregate.isLiked());
  			}
  		}        
         
