@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-14T11:39:47.531112900+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-19T10:37:10.690127700+05:30[Asia/Calcutta]")
 
 @Api(value = "ChallengeResource", description = "the ChallengeResource API")
 public interface ChallengeResourceApi {
