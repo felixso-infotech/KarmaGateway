@@ -271,8 +271,8 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
  		{
  			if(commentAggregate != null)
  			{
- 				if(commentAggregate.getUserId() != null)
- 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(commentAggregate.getUserId()).getBody();
+ 				//if(commentAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET("Sharai").getBody();
  				
  				if(registeredUserAggregate != null)
  				{
@@ -311,8 +311,8 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
  		{
  			if(replyAggregate != null)
  			{
- 				if(replyAggregate.getUserId() != null)
- 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(replyAggregate.getUserId()).getBody();
+ 				//if(replyAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET("Sharai").getBody();
  				
  				if(registeredUserAggregate != null)
  				{
