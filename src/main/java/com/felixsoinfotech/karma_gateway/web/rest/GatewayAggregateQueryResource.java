@@ -32,6 +32,7 @@ import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResource
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
+import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityProfileAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.DimensionDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateQueryResourceApi;
@@ -115,29 +116,23 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
      
       @GetMapping("/committed-activities/{status}/{registeredUserId}")
       @Timed 
- 	 public ResponseEntity<List<CommittedActivityAggregate>> getAllCommittedActivitiesByStatusAndRegisteredUserId(Pageable pageable,@PathVariable String status, @PathVariable Long registeredUserId) { 
+ 	 public ResponseEntity<List<CommittedActivityProfileAggregate>> getAllCommittedActivitiesByStatusAndRegisteredUserId(Pageable pageable,@PathVariable String status, @PathVariable Long registeredUserId) { 
  			  
      	  log.debug("REST request to get a list of CommittedActivity : {}", status);
  		  
- 		  List<CommittedActivityAggregate> committedActivityAggregateList = aggregateQueryResourceApi.getAllCommittedActivitiesByStatusAndRegisteredUserIdUsingGET(registeredUserId, status, null, null, null, null, null, null, null, null, null, null).getBody();
+ 		  List<CommittedActivityProfileAggregate> committedActivityProfileAggregateList = aggregateQueryResourceApi.getAllCommittedActivitiesByStatusAndRegisteredUserIdUsingGET(registeredUserId, status, registeredUserId, null, null, null, null, null, null, null, null, null).getBody();
  		  
- 		  for(CommittedActivityAggregate committedActivityAggregate:committedActivityAggregateList) {
+ 		  for(CommittedActivityProfileAggregate committedActivityProfileAggregate:committedActivityProfileAggregateList) {
  		      
- 			  if(committedActivityAggregate != null) {
- 		           if(committedActivityAggregate.getCommittedActivityId() != null ) {
+ 			  if(committedActivityProfileAggregate != null) {
+ 		           if(committedActivityProfileAggregate.getCommittedActivityId() != null ) {
  		        	        
- 		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
- 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
-					/*
-					 * committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
-					 * committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.
-					 * isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.
-					 * getCommittedActivityId(),"Sharai").getBody());
-					 */
+ 		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityProfileAggregate.getCommittedActivityId()).getBody();
+ 		        	  committedActivityProfileAggregate.setNoOfLoves(countAggregate.getNoOfLoves());					
  		  
  		  } } }
  		  
- 		  return ResponseEntity.ok().body(committedActivityAggregateList); }
+ 		  return ResponseEntity.ok().body(committedActivityProfileAggregateList); }
      
      /**
       * GET  /dimensions : get all the dimensions.
