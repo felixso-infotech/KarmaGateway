@@ -38,6 +38,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO;
+import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityStatusAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentDTO;
@@ -227,13 +228,13 @@ public class GatewayAggregateCommandResource {
      */
     @PostMapping("/create-committed-activity")
     @Timed
-    public ResponseEntity<CommittedActivityDTO> createCommittedActivity(@RequestBody CommittedActivityDTO committedActivityDTO) throws URISyntaxException {
-        log.debug("REST request to save CommittedActivity : {}", committedActivityDTO);
-        if (committedActivityDTO.getId() != null) {
+    public ResponseEntity<CommittedActivityStatusAggregate> createCommittedActivity(@RequestBody CommittedActivityStatusAggregate committedActivityStatusAggregate) throws URISyntaxException {
+        log.debug("REST request to save CommittedActivity : {}", committedActivityStatusAggregate);
+        if (committedActivityStatusAggregate.getCommittedActivityId() != null) {
             throw new BadRequestAlertException("A new committedActivity cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        return aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityDTO);
+        return aggregateCommandResourceApi.createCommittedActivityUsingPOST(committedActivityStatusAggregate);
         
     }
     
@@ -248,13 +249,13 @@ public class GatewayAggregateCommandResource {
      */
     @PutMapping("/update-committed-activity")
     @Timed
-    public ResponseEntity<CommittedActivityDTO> updateCommittedActivity(@RequestBody CommittedActivityDTO committedActivityDTO) throws URISyntaxException {
-        log.debug("REST request to update CommittedActivity : {}", committedActivityDTO);
-        if (committedActivityDTO.getId() == null) {
+    public ResponseEntity<CommittedActivityStatusAggregate> updateCommittedActivity(@RequestBody CommittedActivityStatusAggregate committedActivityStatusAggregate) throws URISyntaxException {
+        log.debug("REST request to update CommittedActivity : {}", committedActivityStatusAggregate);
+        if (committedActivityStatusAggregate.getCommittedActivityId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         
-        return aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityDTO);
+        return aggregateCommandResourceApi.updateCommittedActivityUsingPUT(committedActivityStatusAggregate);
  
     }
     

@@ -12,14 +12,17 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * CommittedActivityDTO
+ * CommittedActivityStatusAggregate
  */
 @Validated
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-22T15:59:50.913140+05:30[Asia/Calcutta]")
 
-public class CommittedActivityDTO   {
+public class CommittedActivityStatusAggregate   {
   @JsonProperty("activityId")
   private Long activityId = null;
+
+  @JsonProperty("committedActivityId")
+  private Long committedActivityId = null;
 
   @JsonProperty("createdDate")
   private OffsetDateTime createdDate = null;
@@ -27,8 +30,11 @@ public class CommittedActivityDTO   {
   @JsonProperty("description")
   private String description = null;
 
-  @JsonProperty("id")
-  private Long id = null;
+  @JsonProperty("proofFile")
+  private byte[] proofFile = null;
+
+  @JsonProperty("proofFileContentType")
+  private String proofFileContentType = null;
 
   @JsonProperty("referenceId")
   private Long referenceId = null;
@@ -72,7 +78,10 @@ public class CommittedActivityDTO   {
   @JsonProperty("status")
   private StatusEnum status = null;
 
-  public CommittedActivityDTO activityId(Long activityId) {
+  @JsonProperty("userId")
+  private String userId = null;
+
+  public CommittedActivityStatusAggregate activityId(Long activityId) {
     this.activityId = activityId;
     return this;
   }
@@ -92,7 +101,27 @@ public class CommittedActivityDTO   {
     this.activityId = activityId;
   }
 
-  public CommittedActivityDTO createdDate(OffsetDateTime createdDate) {
+  public CommittedActivityStatusAggregate committedActivityId(Long committedActivityId) {
+    this.committedActivityId = committedActivityId;
+    return this;
+  }
+
+  /**
+   * Get committedActivityId
+   * @return committedActivityId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Long getCommittedActivityId() {
+    return committedActivityId;
+  }
+
+  public void setCommittedActivityId(Long committedActivityId) {
+    this.committedActivityId = committedActivityId;
+  }
+
+  public CommittedActivityStatusAggregate createdDate(OffsetDateTime createdDate) {
     this.createdDate = createdDate;
     return this;
   }
@@ -113,7 +142,7 @@ public class CommittedActivityDTO   {
     this.createdDate = createdDate;
   }
 
-  public CommittedActivityDTO description(String description) {
+  public CommittedActivityStatusAggregate description(String description) {
     this.description = description;
     return this;
   }
@@ -133,27 +162,47 @@ public class CommittedActivityDTO   {
     this.description = description;
   }
 
-  public CommittedActivityDTO id(Long id) {
-    this.id = id;
+  public CommittedActivityStatusAggregate proofFile(byte[] proofFile) {
+    this.proofFile = proofFile;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get proofFile
+   * @return proofFile
+  **/
+  @ApiModelProperty(value = "")
+
+@Pattern(regexp="^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$") 
+  public byte[] getProofFile() {
+    return proofFile;
+  }
+
+  public void setProofFile(byte[] proofFile) {
+    this.proofFile = proofFile;
+  }
+
+  public CommittedActivityStatusAggregate proofFileContentType(String proofFileContentType) {
+    this.proofFileContentType = proofFileContentType;
+    return this;
+  }
+
+  /**
+   * Get proofFileContentType
+   * @return proofFileContentType
   **/
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
-    return id;
+  public String getProofFileContentType() {
+    return proofFileContentType;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setProofFileContentType(String proofFileContentType) {
+    this.proofFileContentType = proofFileContentType;
   }
 
-  public CommittedActivityDTO referenceId(Long referenceId) {
+  public CommittedActivityStatusAggregate referenceId(Long referenceId) {
     this.referenceId = referenceId;
     return this;
   }
@@ -173,7 +222,7 @@ public class CommittedActivityDTO   {
     this.referenceId = referenceId;
   }
 
-  public CommittedActivityDTO registeredUserId(Long registeredUserId) {
+  public CommittedActivityStatusAggregate registeredUserId(Long registeredUserId) {
     this.registeredUserId = registeredUserId;
     return this;
   }
@@ -193,7 +242,7 @@ public class CommittedActivityDTO   {
     this.registeredUserId = registeredUserId;
   }
 
-  public CommittedActivityDTO status(StatusEnum status) {
+  public CommittedActivityStatusAggregate status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -213,6 +262,26 @@ public class CommittedActivityDTO   {
     this.status = status;
   }
 
+  public CommittedActivityStatusAggregate userId(String userId) {
+    this.userId = userId;
+    return this;
+  }
+
+  /**
+   * Get userId
+   * @return userId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -222,33 +291,39 @@ public class CommittedActivityDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CommittedActivityDTO committedActivityDTO = (CommittedActivityDTO) o;
-    return Objects.equals(this.activityId, committedActivityDTO.activityId) &&
-        Objects.equals(this.createdDate, committedActivityDTO.createdDate) &&
-        Objects.equals(this.description, committedActivityDTO.description) &&
-        Objects.equals(this.id, committedActivityDTO.id) &&
-        Objects.equals(this.referenceId, committedActivityDTO.referenceId) &&
-        Objects.equals(this.registeredUserId, committedActivityDTO.registeredUserId) &&
-        Objects.equals(this.status, committedActivityDTO.status);
+    CommittedActivityStatusAggregate committedActivityStatusAggregate = (CommittedActivityStatusAggregate) o;
+    return Objects.equals(this.activityId, committedActivityStatusAggregate.activityId) &&
+        Objects.equals(this.committedActivityId, committedActivityStatusAggregate.committedActivityId) &&
+        Objects.equals(this.createdDate, committedActivityStatusAggregate.createdDate) &&
+        Objects.equals(this.description, committedActivityStatusAggregate.description) &&
+        Objects.equals(this.proofFile, committedActivityStatusAggregate.proofFile) &&
+        Objects.equals(this.proofFileContentType, committedActivityStatusAggregate.proofFileContentType) &&
+        Objects.equals(this.referenceId, committedActivityStatusAggregate.referenceId) &&
+        Objects.equals(this.registeredUserId, committedActivityStatusAggregate.registeredUserId) &&
+        Objects.equals(this.status, committedActivityStatusAggregate.status) &&
+        Objects.equals(this.userId, committedActivityStatusAggregate.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityId, createdDate, description, id, referenceId, registeredUserId, status);
+    return Objects.hash(activityId, committedActivityId, createdDate, description, proofFile, proofFileContentType, referenceId, registeredUserId, status, userId);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CommittedActivityDTO {\n");
+    sb.append("class CommittedActivityStatusAggregate {\n");
     
     sb.append("    activityId: ").append(toIndentedString(activityId)).append("\n");
+    sb.append("    committedActivityId: ").append(toIndentedString(committedActivityId)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    proofFile: ").append(toIndentedString(proofFile)).append("\n");
+    sb.append("    proofFileContentType: ").append(toIndentedString(proofFileContentType)).append("\n");
     sb.append("    referenceId: ").append(toIndentedString(referenceId)).append("\n");
     sb.append("    registeredUserId: ").append(toIndentedString(registeredUserId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

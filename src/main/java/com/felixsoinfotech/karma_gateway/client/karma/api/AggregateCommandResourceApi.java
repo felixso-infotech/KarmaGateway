@@ -6,7 +6,7 @@
 package com.felixsoinfotech.karma_gateway.client.karma.api;
 
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
-import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO;
+import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityStatusAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-20T16:08:25.471549800+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-22T15:59:50.913140+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateCommandResource", description = "the AggregateCommandResource API")
 public interface AggregateCommandResourceApi {
@@ -46,9 +46,9 @@ public interface AggregateCommandResourceApi {
     ResponseEntity<ActivityAggregate> createActivityUsingPOST1(@ApiParam(value = "activityAggregate" ,required=true )  @Valid @RequestBody ActivityAggregate activityAggregate);
 
 
-    @ApiOperation(value = "createCommittedActivity", nickname = "createCommittedActivityUsingPOST", notes = "", response = CommittedActivityDTO.class, tags={ "aggregate-command-resource", })
+    @ApiOperation(value = "createCommittedActivity", nickname = "createCommittedActivityUsingPOST", notes = "", response = CommittedActivityStatusAggregate.class, tags={ "aggregate-command-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = CommittedActivityDTO.class),
+        @ApiResponse(code = 200, message = "OK", response = CommittedActivityStatusAggregate.class),
         @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
@@ -57,7 +57,7 @@ public interface AggregateCommandResourceApi {
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<CommittedActivityDTO> createCommittedActivityUsingPOST(@ApiParam(value = "committedActivityDTO" ,required=true )  @Valid @RequestBody CommittedActivityDTO committedActivityDTO);
+    ResponseEntity<CommittedActivityStatusAggregate> createCommittedActivityUsingPOST(@ApiParam(value = "committedActivityStatusAggregate" ,required=true )  @Valid @RequestBody CommittedActivityStatusAggregate committedActivityStatusAggregate);
 
 
     @ApiOperation(value = "createRegisteredUser", nickname = "createRegisteredUserUsingPOST", notes = "", response = RegisteredUserDTO.class, tags={ "aggregate-command-resource", })
@@ -99,9 +99,9 @@ public interface AggregateCommandResourceApi {
     ResponseEntity<ActivityAggregate> updateActivityUsingPUT1(@ApiParam(value = "activityAggregate" ,required=true )  @Valid @RequestBody ActivityAggregate activityAggregate);
 
 
-    @ApiOperation(value = "updateCommittedActivity", nickname = "updateCommittedActivityUsingPUT", notes = "", response = CommittedActivityDTO.class, tags={ "aggregate-command-resource", })
+    @ApiOperation(value = "updateCommittedActivity", nickname = "updateCommittedActivityUsingPUT", notes = "", response = CommittedActivityStatusAggregate.class, tags={ "aggregate-command-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = CommittedActivityDTO.class),
+        @ApiResponse(code = 200, message = "OK", response = CommittedActivityStatusAggregate.class),
         @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
@@ -110,7 +110,7 @@ public interface AggregateCommandResourceApi {
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.PUT)
-    ResponseEntity<CommittedActivityDTO> updateCommittedActivityUsingPUT(@ApiParam(value = "committedActivityDTO" ,required=true )  @Valid @RequestBody CommittedActivityDTO committedActivityDTO);
+    ResponseEntity<CommittedActivityStatusAggregate> updateCommittedActivityUsingPUT(@ApiParam(value = "committedActivityStatusAggregate" ,required=true )  @Valid @RequestBody CommittedActivityStatusAggregate committedActivityStatusAggregate);
 
 
     @ApiOperation(value = "updateRegisteredUser", nickname = "updateRegisteredUserUsingPUT", notes = "", response = RegisteredUserDTO.class, tags={ "aggregate-command-resource", })
