@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
+import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityViewAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityProfileAggregate;
@@ -40,6 +43,7 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentAggre
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggregate;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
+import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
 
 
 
@@ -164,21 +168,6 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
         		 
          }
      
-     /**
-      * GET  /activities : get all the activities.
-      *
-      * @param pageable the pagination information
-      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
-      * @return the ResponseEntity with status 200 (OK) and the list of activities in body
-      */
-     @GetMapping("/activities")
-     @Timed
-     public ResponseEntity<List<ActivityDTO>> getAllActivities(Pageable pageable) {
-         log.debug("REST request to get CommittedActivity : {}");
-         
-         return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null, null);
-        
-     }
      
      /**
       * GET  /enums/proof-type : get all the enum Types.
@@ -328,7 +317,22 @@ import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
     }
     
     
-    
+    /**
+     * GET  /activities : get all the activities.
+     *
+     * @param pageable the pagination information
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
+     * @return the ResponseEntity with status 200 (OK) and the list of activities in body
+     */
+    @GetMapping("/activities")
+    @Timed
+    public ResponseEntity<List<ActivityViewAggregate>> getAllActivities(Pageable pageable) {
+        log.debug("REST request to get a page of Activities");
+        
+        return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null);
+       
+       
+    }
     
     
     

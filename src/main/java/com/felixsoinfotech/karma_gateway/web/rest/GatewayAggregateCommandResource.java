@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
-import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityStatusAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.RegisteredUserDTO;
 import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAggregateCommandResourceApi;
