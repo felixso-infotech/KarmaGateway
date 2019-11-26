@@ -104,7 +104,7 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
 		               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
 		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),"Sharai").getBody());
-		  
+		               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getActivityCreatedDate().toZonedDateTime()));
 		  } } }
 		  
 		  return ResponseEntity.ok().body(committedActivityAggregateList); }
