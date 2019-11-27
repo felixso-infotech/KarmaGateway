@@ -107,7 +107,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
 		               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
 		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
-		               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getActivityCreatedDate().toZonedDateTime()));
+		               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getCommittedActivityCreatedDate().toZonedDateTime()));
 		  } } }
 		  
 		  return ResponseEntity.ok().body(committedActivityAggregateList); }
@@ -356,7 +356,32 @@ import io.github.jhipster.web.util.ResponseUtil;
       
     }
 
-    
+    /**
+     * GET  /committed-activities/:id : get the "id" committedActivity.
+     *
+     * @param id the id of the committedActivityDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the committedActivityDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/committed-activity/{id}")
+    @Timed
+    public ResponseEntity<CommittedActivityAggregate> getCommittedActivity(@PathVariable Long id) {
+        log.debug("REST request to get CommittedActivity : {}", id);
+        
+        CommittedActivityAggregate committedActivityAggregate = aggregateQueryResourceApi.getCommittedActivityUsingGET(id).getBody();
+          
+        if(committedActivityAggregate != null) {
+	           if(committedActivityAggregate.getCommittedActivityId() != null ) {
+	        	        
+	        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
+	               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
+	               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
+	               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
+	               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getCommittedActivityCreatedDate().toZonedDateTime()));
+	  } } 
+        
+        return ResponseUtil.wrapOrNotFound(Optional.of(committedActivityAggregate));
+    }
+
     
     
     

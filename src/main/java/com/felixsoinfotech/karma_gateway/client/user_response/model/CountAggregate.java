@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
  * CountAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T16:42:53.647+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T00:30:11.539+05:30[Asia/Calcutta]")
 
 public class CountAggregate   {
   @JsonProperty("likedUserPhotos")

@@ -18,12 +18,9 @@ import javax.validation.constraints.*;
  * CommittedActivityAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T16:42:43.200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T00:30:02.549+05:30[Asia/Calcutta]")
 
 public class CommittedActivityAggregate   {
-  @JsonProperty("activityCreatedDate")
-  private OffsetDateTime activityCreatedDate = null;
-
   @JsonProperty("activityDescription")
   private String activityDescription = null;
 
@@ -32,6 +29,9 @@ public class CommittedActivityAggregate   {
 
   @JsonProperty("challengeId")
   private Long challengeId = null;
+
+  @JsonProperty("committedActivityCreatedDate")
+  private OffsetDateTime committedActivityCreatedDate = null;
 
   @JsonProperty("committedActivityDescription")
   private String committedActivityDescription = null;
@@ -117,6 +117,42 @@ public class CommittedActivityAggregate   {
   @JsonProperty("proofType")
   private ProofTypeEnum proofType = null;
 
+  /**
+   * Gets or Sets status
+   */
+  public enum StatusEnum {
+    TODO("TODO"),
+    
+    INPROGRESS("INPROGRESS"),
+    
+    DONE("DONE");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static StatusEnum fromValue(String text) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+
+  @JsonProperty("status")
+  private StatusEnum status = null;
+
   @JsonProperty("successMessage")
   private String successMessage = null;
 
@@ -168,27 +204,6 @@ public class CommittedActivityAggregate   {
 
   @JsonProperty("videoStringContentType")
   private String videoStringContentType = null;
-
-  public CommittedActivityAggregate activityCreatedDate(OffsetDateTime activityCreatedDate) {
-    this.activityCreatedDate = activityCreatedDate;
-    return this;
-  }
-
-  /**
-   * Get activityCreatedDate
-   * @return activityCreatedDate
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public OffsetDateTime getActivityCreatedDate() {
-    return activityCreatedDate;
-  }
-
-  public void setActivityCreatedDate(OffsetDateTime activityCreatedDate) {
-    this.activityCreatedDate = activityCreatedDate;
-  }
 
   public CommittedActivityAggregate activityDescription(String activityDescription) {
     this.activityDescription = activityDescription;
@@ -248,6 +263,27 @@ public class CommittedActivityAggregate   {
 
   public void setChallengeId(Long challengeId) {
     this.challengeId = challengeId;
+  }
+
+  public CommittedActivityAggregate committedActivityCreatedDate(OffsetDateTime committedActivityCreatedDate) {
+    this.committedActivityCreatedDate = committedActivityCreatedDate;
+    return this;
+  }
+
+  /**
+   * Get committedActivityCreatedDate
+   * @return committedActivityCreatedDate
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public OffsetDateTime getCommittedActivityCreatedDate() {
+    return committedActivityCreatedDate;
+  }
+
+  public void setCommittedActivityCreatedDate(OffsetDateTime committedActivityCreatedDate) {
+    this.committedActivityCreatedDate = committedActivityCreatedDate;
   }
 
   public CommittedActivityAggregate committedActivityDescription(String committedActivityDescription) {
@@ -539,6 +575,26 @@ public class CommittedActivityAggregate   {
     this.proofType = proofType;
   }
 
+  public CommittedActivityAggregate status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Get status
+   * @return status
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
   public CommittedActivityAggregate successMessage(String successMessage) {
     this.successMessage = successMessage;
     return this;
@@ -689,10 +745,10 @@ public class CommittedActivityAggregate   {
       return false;
     }
     CommittedActivityAggregate committedActivityAggregate = (CommittedActivityAggregate) o;
-    return Objects.equals(this.activityCreatedDate, committedActivityAggregate.activityCreatedDate) &&
-        Objects.equals(this.activityDescription, committedActivityAggregate.activityDescription) &&
+    return Objects.equals(this.activityDescription, committedActivityAggregate.activityDescription) &&
         Objects.equals(this.activityId, committedActivityAggregate.activityId) &&
         Objects.equals(this.challengeId, committedActivityAggregate.challengeId) &&
+        Objects.equals(this.committedActivityCreatedDate, committedActivityAggregate.committedActivityCreatedDate) &&
         Objects.equals(this.committedActivityDescription, committedActivityAggregate.committedActivityDescription) &&
         Objects.equals(this.committedActivityId, committedActivityAggregate.committedActivityId) &&
         Objects.equals(this.dimensions, committedActivityAggregate.dimensions) &&
@@ -707,6 +763,7 @@ public class CommittedActivityAggregate   {
         Objects.equals(this.profilePicture, committedActivityAggregate.profilePicture) &&
         Objects.equals(this.profilePictureContentType, committedActivityAggregate.profilePictureContentType) &&
         Objects.equals(this.proofType, committedActivityAggregate.proofType) &&
+        Objects.equals(this.status, committedActivityAggregate.status) &&
         Objects.equals(this.successMessage, committedActivityAggregate.successMessage) &&
         Objects.equals(this.timeElapsed, committedActivityAggregate.timeElapsed) &&
         Objects.equals(this.title, committedActivityAggregate.title) &&
@@ -718,7 +775,7 @@ public class CommittedActivityAggregate   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityCreatedDate, activityDescription, activityId, challengeId, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, imageStringContentType, lastName, liked, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, successMessage, timeElapsed, title, type, userId, videoString, videoStringContentType);
+    return Objects.hash(activityDescription, activityId, challengeId, committedActivityCreatedDate, committedActivityDescription, committedActivityId, dimensions, firstName, imageString, imageStringContentType, lastName, liked, noOfComments, noOfLoves, noOfReferences, profilePicture, profilePictureContentType, proofType, status, successMessage, timeElapsed, title, type, userId, videoString, videoStringContentType);
   }
 
   @Override
@@ -726,10 +783,10 @@ public class CommittedActivityAggregate   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CommittedActivityAggregate {\n");
     
-    sb.append("    activityCreatedDate: ").append(toIndentedString(activityCreatedDate)).append("\n");
     sb.append("    activityDescription: ").append(toIndentedString(activityDescription)).append("\n");
     sb.append("    activityId: ").append(toIndentedString(activityId)).append("\n");
     sb.append("    challengeId: ").append(toIndentedString(challengeId)).append("\n");
+    sb.append("    committedActivityCreatedDate: ").append(toIndentedString(committedActivityCreatedDate)).append("\n");
     sb.append("    committedActivityDescription: ").append(toIndentedString(committedActivityDescription)).append("\n");
     sb.append("    committedActivityId: ").append(toIndentedString(committedActivityId)).append("\n");
     sb.append("    dimensions: ").append(toIndentedString(dimensions)).append("\n");
@@ -744,6 +801,7 @@ public class CommittedActivityAggregate   {
     sb.append("    profilePicture: ").append(toIndentedString(profilePicture)).append("\n");
     sb.append("    profilePictureContentType: ").append(toIndentedString(profilePictureContentType)).append("\n");
     sb.append("    proofType: ").append(toIndentedString(proofType)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    successMessage: ").append(toIndentedString(successMessage)).append("\n");
     sb.append("    timeElapsed: ").append(toIndentedString(timeElapsed)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");

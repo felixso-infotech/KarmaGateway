@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * ActivityAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T16:42:43.200+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T00:30:02.549+05:30[Asia/Calcutta]")
 
 public class ActivityAggregate   {
   @JsonProperty("activityDTO")
