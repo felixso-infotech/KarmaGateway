@@ -42,6 +42,7 @@ import com.felixsoinfotech.karma_gateway.client.user_response.api.UserResponseAg
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CommentAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggregate;
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggregate;
+import com.felixsoinfotech.karma_gateway.security.SecurityUtils;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
 import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
 
@@ -103,7 +104,7 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
 		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
 		               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
 		               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
-		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),"Sharai").getBody());
+		               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
 		               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getActivityCreatedDate().toZonedDateTime()));
 		  } } }
 		  
@@ -256,8 +257,8 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
  		{
  			if(commentAggregate != null)
  			{
- 				//if(commentAggregate.getUserId() != null)
- 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET("Sharai").getBody();
+ 				if(commentAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(commentAggregate.getUserId()).getBody();
  				
  				if(registeredUserAggregate != null)
  				{
@@ -269,7 +270,9 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
  				
  				if(commentAggregate.getCreatedDate() != null)
  				commentAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(commentAggregate.getCreatedDate().toZonedDateTime()));
- 				commentAggregate.setLiked(commentAggregate.isLiked());
+ 				
+ 				if(commentAggregate.getCommentId() != null)
+ 				commentAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommentByUserUsingGET(commentAggregate.getCommentId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
  			}
  		}
         
@@ -296,8 +299,8 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
  		{
  			if(replyAggregate != null)
  			{
- 				//if(replyAggregate.getUserId() != null)
- 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET("Sharai").getBody();
+ 				if(replyAggregate.getUserId() != null)
+ 					registeredUserAggregate=aggregateQueryResourceApi.getRegisteredUserByUserIdUsingGET(replyAggregate.getUserId()).getBody();
  				
  				if(registeredUserAggregate != null)
  				{
@@ -310,7 +313,8 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
  				if(replyAggregate.getDateAndTime() != null)
  					replyAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(replyAggregate.getDateAndTime().toZonedDateTime()));
  				
- 				replyAggregate.setLiked(replyAggregate.isLiked());
+ 				if(replyAggregate.getReplyId() != null)
+ 				replyAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedReplyByUserUsingGET(replyAggregate.getReplyId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
  			}
  		}        
         
