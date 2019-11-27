@@ -132,7 +132,8 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
  		           if(committedActivityProfileAggregate.getCommittedActivityId() != null ) {
  		        	        
  		        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityProfileAggregate.getCommittedActivityId()).getBody();
- 		        	  committedActivityProfileAggregate.setNoOfLoves(countAggregate.getNoOfLoves());					
+ 		        	  committedActivityProfileAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
+ 		        	 committedActivityProfileAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityProfileAggregate.getCommittedActivityCreatedDate().toZonedDateTime()));
  		  
  		  } } }
  		  

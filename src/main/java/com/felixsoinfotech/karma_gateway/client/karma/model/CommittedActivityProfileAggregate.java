@@ -15,12 +15,9 @@ import javax.validation.constraints.*;
  * CommittedActivityProfileAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-25T14:42:49.185419+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T10:16:30.130+05:30[Asia/Calcutta]")
 
 public class CommittedActivityProfileAggregate   {
-  @JsonProperty("activityCreatedDate")
-  private OffsetDateTime activityCreatedDate = null;
-
   @JsonProperty("activityId")
   private Long activityId = null;
 
@@ -32,6 +29,9 @@ public class CommittedActivityProfileAggregate   {
 
   @JsonProperty("activityTitle")
   private String activityTitle = null;
+
+  @JsonProperty("committedActivityCreatedDate")
+  private OffsetDateTime committedActivityCreatedDate = null;
 
   @JsonProperty("committedActivityId")
   private Long committedActivityId = null;
@@ -118,27 +118,6 @@ public class CommittedActivityProfileAggregate   {
   @JsonProperty("type")
   private TypeEnum type = null;
 
-  public CommittedActivityProfileAggregate activityCreatedDate(OffsetDateTime activityCreatedDate) {
-    this.activityCreatedDate = activityCreatedDate;
-    return this;
-  }
-
-  /**
-   * Get activityCreatedDate
-   * @return activityCreatedDate
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public OffsetDateTime getActivityCreatedDate() {
-    return activityCreatedDate;
-  }
-
-  public void setActivityCreatedDate(OffsetDateTime activityCreatedDate) {
-    this.activityCreatedDate = activityCreatedDate;
-  }
-
   public CommittedActivityProfileAggregate activityId(Long activityId) {
     this.activityId = activityId;
     return this;
@@ -217,6 +196,27 @@ public class CommittedActivityProfileAggregate   {
 
   public void setActivityTitle(String activityTitle) {
     this.activityTitle = activityTitle;
+  }
+
+  public CommittedActivityProfileAggregate committedActivityCreatedDate(OffsetDateTime committedActivityCreatedDate) {
+    this.committedActivityCreatedDate = committedActivityCreatedDate;
+    return this;
+  }
+
+  /**
+   * Get committedActivityCreatedDate
+   * @return committedActivityCreatedDate
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public OffsetDateTime getCommittedActivityCreatedDate() {
+    return committedActivityCreatedDate;
+  }
+
+  public void setCommittedActivityCreatedDate(OffsetDateTime committedActivityCreatedDate) {
+    this.committedActivityCreatedDate = committedActivityCreatedDate;
   }
 
   public CommittedActivityProfileAggregate committedActivityId(Long committedActivityId) {
@@ -369,11 +369,11 @@ public class CommittedActivityProfileAggregate   {
       return false;
     }
     CommittedActivityProfileAggregate committedActivityProfileAggregate = (CommittedActivityProfileAggregate) o;
-    return Objects.equals(this.activityCreatedDate, committedActivityProfileAggregate.activityCreatedDate) &&
-        Objects.equals(this.activityId, committedActivityProfileAggregate.activityId) &&
+    return Objects.equals(this.activityId, committedActivityProfileAggregate.activityId) &&
         Objects.equals(this.activityImageContentType, committedActivityProfileAggregate.activityImageContentType) &&
         Objects.equals(this.activityImageString, committedActivityProfileAggregate.activityImageString) &&
         Objects.equals(this.activityTitle, committedActivityProfileAggregate.activityTitle) &&
+        Objects.equals(this.committedActivityCreatedDate, committedActivityProfileAggregate.committedActivityCreatedDate) &&
         Objects.equals(this.committedActivityId, committedActivityProfileAggregate.committedActivityId) &&
         Objects.equals(this.noOfLoves, committedActivityProfileAggregate.noOfLoves) &&
         Objects.equals(this.proofImageContentType, committedActivityProfileAggregate.proofImageContentType) &&
@@ -385,7 +385,7 @@ public class CommittedActivityProfileAggregate   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityCreatedDate, activityId, activityImageContentType, activityImageString, activityTitle, committedActivityId, noOfLoves, proofImageContentType, proofImageString, status, timeElapsed, type);
+    return Objects.hash(activityId, activityImageContentType, activityImageString, activityTitle, committedActivityCreatedDate, committedActivityId, noOfLoves, proofImageContentType, proofImageString, status, timeElapsed, type);
   }
 
   @Override
@@ -393,11 +393,11 @@ public class CommittedActivityProfileAggregate   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CommittedActivityProfileAggregate {\n");
     
-    sb.append("    activityCreatedDate: ").append(toIndentedString(activityCreatedDate)).append("\n");
     sb.append("    activityId: ").append(toIndentedString(activityId)).append("\n");
     sb.append("    activityImageContentType: ").append(toIndentedString(activityImageContentType)).append("\n");
     sb.append("    activityImageString: ").append(toIndentedString(activityImageString)).append("\n");
     sb.append("    activityTitle: ").append(toIndentedString(activityTitle)).append("\n");
+    sb.append("    committedActivityCreatedDate: ").append(toIndentedString(committedActivityCreatedDate)).append("\n");
     sb.append("    committedActivityId: ").append(toIndentedString(committedActivityId)).append("\n");
     sb.append("    noOfLoves: ").append(toIndentedString(noOfLoves)).append("\n");
     sb.append("    proofImageContentType: ").append(toIndentedString(proofImageContentType)).append("\n");
