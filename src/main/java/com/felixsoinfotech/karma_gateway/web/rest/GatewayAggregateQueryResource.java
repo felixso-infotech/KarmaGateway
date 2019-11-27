@@ -17,7 +17,7 @@
   package com.felixsoinfotech.karma_gateway.web.rest;
   
 import java.util.List;
-
+import java.util.Optional;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
@@ -45,6 +45,8 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggrega
 import com.felixsoinfotech.karma_gateway.security.SecurityUtils;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
 import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
 
 
 
@@ -338,6 +340,22 @@ import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
        
        
     }
+    
+    /**
+     * GET  /activities/:id : get the "id" activity.
+     *
+     * @param id the id of the activityDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/activity/{id}")
+    @Timed
+    public ResponseEntity<ActivityViewAggregate> getActivityById(@PathVariable Long id) {
+        log.debug("REST request to get Activity : {}", id);
+        
+        return aggregateQueryResourceApi.getActivityByIdUsingGET(id);
+      
+    }
+
     
     
     

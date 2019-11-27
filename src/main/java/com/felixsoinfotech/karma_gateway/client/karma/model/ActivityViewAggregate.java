@@ -4,9 +4,12 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityImageAggregate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,7 +18,7 @@ import javax.validation.constraints.*;
  * ActivityViewAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T15:03:00.314+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T16:42:43.200+05:30[Asia/Calcutta]")
 
 public class ActivityViewAggregate   {
   @JsonProperty("activityId")
@@ -35,6 +38,10 @@ public class ActivityViewAggregate   {
 
   @JsonProperty("imageStringContentType")
   private String imageStringContentType = null;
+
+  @JsonProperty("introductionStories")
+  @Valid
+  private List<ActivityImageAggregate> introductionStories = null;
 
   @JsonProperty("title")
   private String title = null;
@@ -194,6 +201,35 @@ public class ActivityViewAggregate   {
     this.imageStringContentType = imageStringContentType;
   }
 
+  public ActivityViewAggregate introductionStories(List<ActivityImageAggregate> introductionStories) {
+    this.introductionStories = introductionStories;
+    return this;
+  }
+
+  public ActivityViewAggregate addIntroductionStoriesItem(ActivityImageAggregate introductionStoriesItem) {
+    if (this.introductionStories == null) {
+      this.introductionStories = new ArrayList<ActivityImageAggregate>();
+    }
+    this.introductionStories.add(introductionStoriesItem);
+    return this;
+  }
+
+  /**
+   * Get introductionStories
+   * @return introductionStories
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<ActivityImageAggregate> getIntroductionStories() {
+    return introductionStories;
+  }
+
+  public void setIntroductionStories(List<ActivityImageAggregate> introductionStories) {
+    this.introductionStories = introductionStories;
+  }
+
   public ActivityViewAggregate title(String title) {
     this.title = title;
     return this;
@@ -250,13 +286,14 @@ public class ActivityViewAggregate   {
         Objects.equals(this.createdDate, activityViewAggregate.createdDate) &&
         Objects.equals(this.imageString, activityViewAggregate.imageString) &&
         Objects.equals(this.imageStringContentType, activityViewAggregate.imageStringContentType) &&
+        Objects.equals(this.introductionStories, activityViewAggregate.introductionStories) &&
         Objects.equals(this.title, activityViewAggregate.title) &&
         Objects.equals(this.type, activityViewAggregate.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityId, challengeId, challengeName, createdDate, imageString, imageStringContentType, title, type);
+    return Objects.hash(activityId, challengeId, challengeName, createdDate, imageString, imageStringContentType, introductionStories, title, type);
   }
 
   @Override
@@ -270,6 +307,7 @@ public class ActivityViewAggregate   {
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    imageString: ").append(toIndentedString(imageString)).append("\n");
     sb.append("    imageStringContentType: ").append(toIndentedString(imageStringContentType)).append("\n");
+    sb.append("    introductionStories: ").append(toIndentedString(introductionStories)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");

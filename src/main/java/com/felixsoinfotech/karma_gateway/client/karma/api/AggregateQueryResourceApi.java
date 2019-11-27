@@ -30,10 +30,22 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T15:03:00.314+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T16:42:43.200+05:30[Asia/Calcutta]")
 
 @Api(value = "AggregateQueryResource", description = "the AggregateQueryResource API")
 public interface AggregateQueryResourceApi {
+
+    @ApiOperation(value = "getActivityById", nickname = "getActivityByIdUsingGET", notes = "", response = ActivityViewAggregate.class, tags={ "aggregate-query-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = ActivityViewAggregate.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/query/activities/{id}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<ActivityViewAggregate> getActivityByIdUsingGET(@ApiParam(value = "id",required=true) @PathVariable("id") Long id);
+
 
     @ApiOperation(value = "getAllActivities", nickname = "getAllActivitiesUsingGET1", notes = "", response = ActivityViewAggregate.class, responseContainer = "List", tags={ "aggregate-query-resource", })
     @ApiResponses(value = { 
