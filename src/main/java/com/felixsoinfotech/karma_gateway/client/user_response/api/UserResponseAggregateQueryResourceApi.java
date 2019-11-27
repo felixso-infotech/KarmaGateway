@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T14:15:32.714+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-27T15:03:10.094+05:30[Asia/Calcutta]")
 
 @Api(value = "UserResponseAggregateQueryResource", description = "the UserResponseAggregateQueryResource API")
 public interface UserResponseAggregateQueryResourceApi {
@@ -134,7 +134,7 @@ public interface UserResponseAggregateQueryResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/query/isLiked/{commentId}/{userId}",
+    @RequestMapping(value = "/api/query/isLikedComment/{commentId}/{userId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<Boolean> isLikedCommentByUserUsingGET(@ApiParam(value = "commentId",required=true) @PathVariable("commentId") Long commentId,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
@@ -158,7 +158,7 @@ public interface UserResponseAggregateQueryResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/query/isLiked/{replyId}/{userId}",
+    @RequestMapping(value = "/api/query/isLikedReply/{replyId}/{userId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<Boolean> isLikedReplyByUserUsingGET(@ApiParam(value = "replyId",required=true) @PathVariable("replyId") Long replyId,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
