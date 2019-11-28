@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('npm-install') {
       steps {
-        sh '/home/sanilkumar_onlinework/servers/apache-maven-3.6.2/bin/mvn spring-boot:run'
+        sh 'sudo npm install'
       }
     }
   }
