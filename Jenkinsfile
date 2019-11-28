@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'sudo mvn spring-boot:run'
+        sh '~/servers/apache-maven-3.6.2/bin/mvn spring-boot:run'
       }
     }
   }
