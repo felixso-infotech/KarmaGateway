@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
  * ChallengeDTO
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T00:30:02.549+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T12:49:55.824+05:30[Asia/Calcutta]")
 
 public class ChallengeDTO   {
   @JsonProperty("createdDate")

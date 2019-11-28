@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  * ActivityViewAggregate
  */
 @Validated
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T00:30:02.549+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-28T12:49:55.824+05:30[Asia/Calcutta]")
 
 public class ActivityViewAggregate   {
   @JsonProperty("activityId")
@@ -42,6 +42,9 @@ public class ActivityViewAggregate   {
   @JsonProperty("introductionStories")
   @Valid
   private List<ActivityImageAggregate> introductionStories = null;
+
+  @JsonProperty("successMessage")
+  private String successMessage = null;
 
   @JsonProperty("title")
   private String title = null;
@@ -230,6 +233,26 @@ public class ActivityViewAggregate   {
     this.introductionStories = introductionStories;
   }
 
+  public ActivityViewAggregate successMessage(String successMessage) {
+    this.successMessage = successMessage;
+    return this;
+  }
+
+  /**
+   * Get successMessage
+   * @return successMessage
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getSuccessMessage() {
+    return successMessage;
+  }
+
+  public void setSuccessMessage(String successMessage) {
+    this.successMessage = successMessage;
+  }
+
   public ActivityViewAggregate title(String title) {
     this.title = title;
     return this;
@@ -287,13 +310,14 @@ public class ActivityViewAggregate   {
         Objects.equals(this.imageString, activityViewAggregate.imageString) &&
         Objects.equals(this.imageStringContentType, activityViewAggregate.imageStringContentType) &&
         Objects.equals(this.introductionStories, activityViewAggregate.introductionStories) &&
+        Objects.equals(this.successMessage, activityViewAggregate.successMessage) &&
         Objects.equals(this.title, activityViewAggregate.title) &&
         Objects.equals(this.type, activityViewAggregate.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(activityId, challengeId, challengeName, createdDate, imageString, imageStringContentType, introductionStories, title, type);
+    return Objects.hash(activityId, challengeId, challengeName, createdDate, imageString, imageStringContentType, introductionStories, successMessage, title, type);
   }
 
   @Override
@@ -308,6 +332,7 @@ public class ActivityViewAggregate   {
     sb.append("    imageString: ").append(toIndentedString(imageString)).append("\n");
     sb.append("    imageStringContentType: ").append(toIndentedString(imageStringContentType)).append("\n");
     sb.append("    introductionStories: ").append(toIndentedString(introductionStories)).append("\n");
+    sb.append("    successMessage: ").append(toIndentedString(successMessage)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
