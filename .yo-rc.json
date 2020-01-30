@@ -30,12 +30,12 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": "http://34.66.94.234:8075/UserResponse/v2/api-docs",
+      "inputSpec": "http://35.209.40.232:8075/UserResponse/v2/api-docs",
       "cliName": "user_response"
     },
     "apis": {
       "karma": {
-        "spec": "http://34.66.94.234:8065/Karma/v2/api-docs"
+        "spec": "http://35.209.40.232:8065/Karma/v2/api-docs"
       },
       "UserResponse": {
         "spec": "http://35.208.4.27:8075/UserResponse/v2/api-docs"
@@ -44,7 +44,7 @@
         "spec": "http://35.208.4.27:8065/Karma/v2/api-docs"
       },
       "user_response": {
-        "spec": "http://34.66.94.234:8075/UserResponse/v2/api-docs"
+        "spec": "http://35.209.40.232:8075/UserResponse/v2/api-docs"
       },
       "userResponse": {
         "spec": "http://35.208.4.27:8075/UserResponse/v2/api-docs"
