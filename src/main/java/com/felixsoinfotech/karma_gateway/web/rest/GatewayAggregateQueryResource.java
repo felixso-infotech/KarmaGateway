@@ -451,32 +451,30 @@ import io.github.jhipster.web.util.ResponseUtil;
 	/**
 	 * Check a well wishing relationship.
 	 *
-	 * @param userId        the registered user id
 	 * @param wellWishingId the registered user id
 	 * @return the well wishing registered user
 	 */
-	@GetMapping("/registeredUser/Is-Following/{userId}/{wellWishingId}")
-	public Boolean checkRegisteredUserIsFollowing(@PathVariable String userId, @PathVariable String wellWishingId){
+	@GetMapping("/registeredUser/Is-Following/{wellWishingId}")
+	public Boolean checkRegisteredUserIsFollowing(@PathVariable String wellWishingId){
 		
-		log.debug("REST request to check RegisteredUser Is Following : {}", userId,wellWishingId);
+		log.debug("REST request to check RegisteredUser Is Following : {}",SecurityUtils.getCurrentUserLogin().get(),wellWishingId);
 		
-		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowingUsingGET(userId, wellWishingId).getBody();
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowingUsingGET(SecurityUtils.getCurrentUserLogin().get(),wellWishingId).getBody();
 		
 	}
 	
 	/**
 	 * Check a well wishing relationship.
 	 *
-	 * @param userId        the registered user id
 	 * @param wellWishingId the registered user id
 	 * @return the well wisher registered user
 	 */
-	@GetMapping("/registeredUser/Is-Followed/{userId}/{wellWisherId}")
-	public Boolean checkRegisteredUserIsFollowed(@PathVariable String userId, @PathVariable String wellWisherId)
+	@GetMapping("/registeredUser/Is-Followed/{wellWisherId}")
+	public Boolean checkRegisteredUserIsFollowed(@PathVariable String wellWisherId)
 	{
-		log.debug("REST request to check RegisteredUser Is Followed : {}", userId,wellWisherId);
+		log.debug("REST request to check RegisteredUser Is Followed : {}",SecurityUtils.getCurrentUserLogin().get(),wellWisherId);
 		
-		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedUsingGET(userId, wellWisherId).getBody();
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedUsingGET(SecurityUtils.getCurrentUserLogin().get(),wellWisherId).getBody();
 		
 	}
 	
@@ -484,16 +482,15 @@ import io.github.jhipster.web.util.ResponseUtil;
 	/**
 	 * Check a Friend relationship.
 	 *
-	 * @param registeredUserOneUserId the registered user id
-	 * @param registeredUserTwoUserId the registered user id
+	 * @param registeredUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	@GetMapping("/registeredUser/registeredUsers-AreFriends/{currentUserId}/{registeredUserId}")
-	public Boolean checkRegisteredUsersAreFriends(@PathVariable String currentUserId,@PathVariable String registeredUserId)
+	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserId}")
+	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserId)
 	{
-		log.debug("REST request to check RegisteredUsers are friends : {}", currentUserId,registeredUserId);
+		log.debug("REST request to check RegisteredUsers are friends : {}",SecurityUtils.getCurrentUserLogin().get(),registeredUserId);
 		
-		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(currentUserId, registeredUserId).getBody();
+		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(SecurityUtils.getCurrentUserLogin().get(),registeredUserId).getBody();
 	}
 
     
