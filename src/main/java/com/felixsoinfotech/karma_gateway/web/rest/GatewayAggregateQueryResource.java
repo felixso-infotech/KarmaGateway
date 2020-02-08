@@ -21,17 +21,16 @@ import java.util.Optional;
 
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.GetMapping; 
 import org.springframework.web.bind.annotation.PathVariable; 
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RestController;  
 import com.codahale.metrics.annotation.Timed;
+import com.felixsoinfotech.karma_gateway.client.friendship_service.api.RegisteredUserGraphResourceApi;
+import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUser;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi;
-import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityViewAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityAggregate;
@@ -44,8 +43,6 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.CountAggrega
 import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggregate;
 import com.felixsoinfotech.karma_gateway.security.SecurityUtils;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
-import com.felixsoinfotech.karma_gateway.web.rest.util.PaginationUtil;
-
 import io.github.jhipster.web.util.ResponseUtil;
 
 
@@ -72,14 +69,21 @@ import io.github.jhipster.web.util.ResponseUtil;
      private UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi;
      
      private GatewayAggregateQueryService gatewayAggregateQueryService;
+     
+     private RegisteredUserGraphResourceApi registeredUserGraphResourceApi;
    
      public GatewayAggregateQueryResource(AggregateQueryResourceApi aggregateQueryResourceApi,
     		                              UserResponseAggregateQueryResourceApi userResponseAggregateQueryResourceApi,
-    		                              GatewayAggregateQueryService gatewayAggregateQueryService){
+    		                              GatewayAggregateQueryService gatewayAggregateQueryService,
+    		                              RegisteredUserGraphResourceApi registeredUserGraphResourceApi){
                        this.aggregateQueryResourceApi=aggregateQueryResourceApi; 
                        this.userResponseAggregateQueryResourceApi=userResponseAggregateQueryResourceApi;
                        this.gatewayAggregateQueryService=gatewayAggregateQueryService;
+                       this.registeredUserGraphResourceApi=registeredUserGraphResourceApi;
       }
+     
+     
+   //************************************KarmaService************************************************
   
    /**
 	 * GET /committed-activities/:status : get the "status" committedActivity.
@@ -237,6 +241,67 @@ import io.github.jhipster.web.util.ResponseUtil;
      }
      
      /**
+      * GET  /activities : get all the activities.
+      *
+      * @param pageable the pagination information
+      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
+      * @return the ResponseEntity with status 200 (OK) and the list of activities in body
+      */
+     @GetMapping("/activities")
+     @Timed
+     public ResponseEntity<List<ActivityViewAggregate>> getAllActivities(Pageable pageable) {
+         log.debug("REST request to get a page of Activities");
+         
+         return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null);
+        
+        
+     }
+     
+     /**
+      * GET  /activities/:id : get the "id" activity.
+      *
+      * @param id the id of the activityDTO to retrieve
+      * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+      */
+     @GetMapping("/activity/{id}")
+     @Timed
+     public ResponseEntity<ActivityViewAggregate> getActivityById(@PathVariable Long id) {
+         log.debug("REST request to get Activity : {}", id);
+         
+         return aggregateQueryResourceApi.getActivityByIdUsingGET(id);
+       
+     }
+
+     /**
+      * GET  /committed-activities/:id : get the "id" committedActivity.
+      *
+      * @param id the id of the committedActivityDTO to retrieve
+      * @return the ResponseEntity with status 200 (OK) and with body the committedActivityDTO, or with status 404 (Not Found)
+      */
+     @GetMapping("/committed-activity/{id}")
+     @Timed
+     public ResponseEntity<CommittedActivityAggregate> getCommittedActivity(@PathVariable Long id) {
+         log.debug("REST request to get CommittedActivity : {}", id);
+         
+         CommittedActivityAggregate committedActivityAggregate = aggregateQueryResourceApi.getCommittedActivityUsingGET(id).getBody();
+           
+         if(committedActivityAggregate != null) {
+ 	           if(committedActivityAggregate.getCommittedActivityId() != null ) {
+ 	        	        
+ 	        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
+ 	               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
+ 	               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
+ 	               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
+ 	               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getCommittedActivityCreatedDate().toZonedDateTime()));
+ 	  } } 
+         
+         return ResponseUtil.wrapOrNotFound(Optional.of(committedActivityAggregate));
+     }
+     
+
+   //************************************UserResponse************************************************
+     
+     /**
  	 * GET /comments : get all the comments by commitedActivityId.
  	 *
  	 * @param commitedActivityId
@@ -324,64 +389,144 @@ import io.github.jhipster.web.util.ResponseUtil;
     }
     
     
-    /**
-     * GET  /activities : get all the activities.
-     *
-     * @param pageable the pagination information
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
-     * @return the ResponseEntity with status 200 (OK) and the list of activities in body
-     */
-    @GetMapping("/activities")
-    @Timed
-    public ResponseEntity<List<ActivityViewAggregate>> getAllActivities(Pageable pageable) {
-        log.debug("REST request to get a page of Activities");
-        
-        return aggregateQueryResourceApi.getAllActivitiesUsingGET1(null, null, null, null, null, null, null, null, null, null);
-       
-       
-    }
+    //************************************FriendshipService************************************************ 
+    
     
     /**
-     * GET  /activities/:id : get the "id" activity.
-     *
-     * @param id the id of the activityDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
-     */
-    @GetMapping("/activity/{id}")
-    @Timed
-    public ResponseEntity<ActivityViewAggregate> getActivityById(@PathVariable Long id) {
-        log.debug("REST request to get Activity : {}", id);
-        
-        return aggregateQueryResourceApi.getActivityByIdUsingGET(id);
-      
-    }
+	 * GET /registeredUser/wellWisher/{userId} : get all well wishers by user id
+	 *
+	 * @param userId the registered user id
+	 */
+	@GetMapping("/registeredUser/well-Wishers/{userId}")
+	public List<RegisteredUser> findAllWellWishersByUserId(@PathVariable String userId) {
+		
+		log.debug("REST request to get a list of WellWishers By UserId : {}", userId);
+		
+		return registeredUserGraphResourceApi.findAllWellWishersByUserIdUsingGET(userId).getBody();
+		
+	}
+	
+	/**
+	 * GET /registeredUser/wellWishing/{userId} : get all well wishers by user id
+	 *
+	 * @param userId the registered user id
+	 */
+	@GetMapping("/registeredUser/well-Wishing/{userId}")
+	public List<RegisteredUser> findAllWellWishingByUserId(@PathVariable String userId) {
+		
+		log.debug("REST request to get a list of WellWishing By UserId : {}", userId);
+		
+		return registeredUserGraphResourceApi.findAllWellWishingByUserIdUsingGET(userId).getBody();
+				
+	}
+	
+	/**
+	 * GET /registeredUser/wellWisher/{userId} : get count well wishers by user id
+	 *
+	 * @param userId the registered user id
+	 */
+	@GetMapping("/registeredUser/wellWishers-count/{userId}")	
+	public Long countOfWellWishersByUserId(@PathVariable String userId) {
+		
+		log.debug("REST request to get count of WellWishers By UserId : {}", userId);
+		
+		return registeredUserGraphResourceApi.countOfWellWishersByUserIdUsingGET(userId).getBody();
+				
+	}
+	
+	/**
+	 * GET /registeredUser/wellWishing/{userId} : get count well wishing by user id
+	 *
+	 * @param userId the registered user id
+	 */
+	@GetMapping("/registeredUser/wellWishing-count/{userId}")
+	public Long countOfWellWishingByUserId(@PathVariable String userId) {
+		
+		log.debug("REST request to get count of WellWishing By UserId : {}", userId);
+		
+		return registeredUserGraphResourceApi.countOfWellWishingByUserIdUsingGET(userId).getBody();
 
-    /**
-     * GET  /committed-activities/:id : get the "id" committedActivity.
-     *
-     * @param id the id of the committedActivityDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the committedActivityDTO, or with status 404 (Not Found)
-     */
-    @GetMapping("/committed-activity/{id}")
-    @Timed
-    public ResponseEntity<CommittedActivityAggregate> getCommittedActivity(@PathVariable Long id) {
-        log.debug("REST request to get CommittedActivity : {}", id);
-        
-        CommittedActivityAggregate committedActivityAggregate = aggregateQueryResourceApi.getCommittedActivityUsingGET(id).getBody();
-          
-        if(committedActivityAggregate != null) {
-	           if(committedActivityAggregate.getCommittedActivityId() != null ) {
-	        	        
-	        	   CountAggregate countAggregate = userResponseAggregateQueryResourceApi.getCountOfCommentsAndLikesByCommitedActivityIdUsingGET(committedActivityAggregate.getCommittedActivityId()).getBody();
-	               committedActivityAggregate.setNoOfLoves(countAggregate.getNoOfLoves());
-	               committedActivityAggregate.setNoOfComments(countAggregate.getNoOfComments());
-	               committedActivityAggregate.setLiked(userResponseAggregateQueryResourceApi.isLikedCommittedActivityByUserUsingGET(committedActivityAggregate.getCommittedActivityId(),SecurityUtils.getCurrentUserLogin().get()).getBody());
-	               committedActivityAggregate.setTimeElapsed(gatewayAggregateQueryService.calculateTimeDifferenceBetweenCurrentAndPostedTime(committedActivityAggregate.getCommittedActivityCreatedDate().toZonedDateTime()));
-	  } } 
-        
-        return ResponseUtil.wrapOrNotFound(Optional.of(committedActivityAggregate));
-    }
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wishing registered user
+	 */
+	@GetMapping("/registeredUser/Is-Following/{userId}/{wellWishingId}")
+	public Boolean checkRegisteredUserIsFollowing(@PathVariable String userId, @PathVariable String wellWishingId){
+		
+		log.debug("REST request to check RegisteredUser Is Following : {}", userId,wellWishingId);
+		
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowingUsingGET(userId, wellWishingId).getBody();
+		
+	}
+	
+	/**
+	 * Check a well wishing relationship.
+	 *
+	 * @param userId        the registered user id
+	 * @param wellWishingId the registered user id
+	 * @return the well wisher registered user
+	 */
+	@GetMapping("/registeredUser/Is-Followed/{userId}/{wellWisherId}")
+	public Boolean checkRegisteredUserIsFollowed(@PathVariable String userId, @PathVariable String wellWisherId)
+	{
+		log.debug("REST request to check RegisteredUser Is Followed : {}", userId,wellWisherId);
+		
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedUsingGET(userId, wellWisherId).getBody();
+		
+	}
+	
+	/**
+	 * Check a Friend relationship.
+	 *
+	 * @param registeredUserOneUserId the registered user id
+	 * @param registeredUserTwoUserId the registered user id
+	 * @return the FRIEND_OF registered user
+	 */
+	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserOneUserId}/{registeredUserTwoUserId}")
+	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserOneUserId,@PathVariable String registeredUserTwoUserId)
+	{
+		log.debug("REST request to check RegisteredUsers are friends : {}", registeredUserOneUserId,registeredUserTwoUserId);
+		
+		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(registeredUserOneUserId, registeredUserTwoUserId).getBody();
+				
+		
+	}
 
+    
+	//************************************ChatService************************************************ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

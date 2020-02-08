@@ -30,8 +30,8 @@
   },
   "generator-jhipster-swagger-cli": {
     "promptValues": {
-      "inputSpec": "http://35.209.40.232:8075/UserResponse/v2/api-docs",
-      "cliName": "user_response"
+      "inputSpec": "http://35.209.40.232:8040/FriendshipService/v2/api-docs",
+      "cliName": "FriendshipService"
     },
     "apis": {
       "karma": {
@@ -48,6 +48,9 @@
       },
       "userResponse": {
         "spec": "http://35.208.4.27:8075/UserResponse/v2/api-docs"
+      },
+      "FriendshipService": {
+        "spec": "http://35.209.40.232:8040/FriendshipService/v2/api-docs"
       }
     }
   }

@@ -29,7 +29,6 @@ import io.github.jhipster.config.JHipsterConstants;
 @ComponentScan( excludeFilters = {
     @ComponentScan.Filter(com.felixsoinfotech.karma_gateway.client.ExcludeFromComponentScan.class)
 })
-
 @SpringBootApplication
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
 @CrossOrigin("*")

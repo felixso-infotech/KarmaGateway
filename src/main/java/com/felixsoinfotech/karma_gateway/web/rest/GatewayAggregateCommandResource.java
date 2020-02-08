@@ -35,6 +35,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+
+import com.felixsoinfotech.karma_gateway.client.friendship_service.api.RegisteredUserGraphResourceApi;
+import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUserModel;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateCommandResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.CommittedActivityStatusAggregate;
@@ -57,14 +60,20 @@ public class GatewayAggregateCommandResource {
 	private static final String ENTITY_NAME = "GatewayAggregateCommandResource";
 
 	private AggregateCommandResourceApi aggregateCommandResourceApi;
+	
+	private RegisteredUserGraphResourceApi registeredUserGraphResourceApi;
 
 	private UserResponseAggregateCommandResourceApi userResponseAggregateCommandResourceApi;
 
 	public GatewayAggregateCommandResource(AggregateCommandResourceApi aggregateCommandResourceApi,
-			UserResponseAggregateCommandResourceApi userResponseAggregateCommandResourceApi) {
+			UserResponseAggregateCommandResourceApi userResponseAggregateCommandResourceApi,
+			RegisteredUserGraphResourceApi registeredUserGraphResourceApi) {
 		this.aggregateCommandResourceApi = aggregateCommandResourceApi;
 		this.userResponseAggregateCommandResourceApi = userResponseAggregateCommandResourceApi;
+		this.registeredUserGraphResourceApi=registeredUserGraphResourceApi;
 	}
+	
+	//************************************UserResponse************************************************
 
 	/**
 	 * POST /loves : save a new love.
@@ -173,6 +182,9 @@ public class GatewayAggregateCommandResource {
 		return userResponseAggregateCommandResourceApi.doReplyUsingPOST(replyDTO);
 
 	}
+	
+	
+	//************************************KarmaService************************************************
 
 	/**
 	 * POST /activities : Create a new activity.
@@ -326,5 +338,52 @@ public class GatewayAggregateCommandResource {
 		return aggregateCommandResourceApi.deleteRegisteredUserUsingDELETE(id);
 
 	}
+	
+	//************************************FriendshipService************************************************
+	
+	
+	/**
+	 * POST /createWellWisher-wellWishing/registeredUser/ create well
+	 * wisher-wellwishing relationship
+	 *
+	 * @param registeredUserModel the registeredUserModel.
+	 *
+	 */
+	@PostMapping("/createWellWisher-wellWishing/registeredUser/")
+	public String createWellWisherAndWellWishing(@RequestBody RegisteredUserModel registeredUserModel) throws URISyntaxException {
+		
+		log.debug("request to create welwisher-wellwishing  currentuser:" + registeredUserModel.getCurrentUser() + " registeredUser:" + registeredUserModel.getRegisteredUser());
+		
+		return registeredUserGraphResourceApi.createWellWisherAndWellWishingUsingPOST(registeredUserModel).getBody();
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
