@@ -8,17 +8,25 @@ package com.felixsoinfotech.karma_gateway.client.friendship_service.api;
 import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUser;
 import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUserModel;
 import io.swagger.annotations.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
-
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-02-07T16:27:56.038+05:30[Asia/Calcutta]")
+import java.util.Map;
+import java.util.Optional;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-02-08T14:53:19.796+05:30[Asia/Calcutta]")
 
 @Api(value = "RegisteredUserGraphResource", description = "the RegisteredUserGraphResource API")
 public interface RegisteredUserGraphResourceApi {
@@ -53,10 +61,10 @@ public interface RegisteredUserGraphResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/registeredUser/registeredUsers-AreFriends/{registeredUserOneUserId}/{registeredUserTwoUserId}",
+    @RequestMapping(value = "/api/graph/registeredUser/registeredUsers-AreFriends/{currentUserId}/{registeredUserId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<Boolean> checkRegisteredUsersAreFriendsUsingGET(@ApiParam(value = "registeredUserOneUserId",required=true) @PathVariable("registeredUserOneUserId") String registeredUserOneUserId,@ApiParam(value = "registeredUserTwoUserId",required=true) @PathVariable("registeredUserTwoUserId") String registeredUserTwoUserId);
+    ResponseEntity<Boolean> checkRegisteredUsersAreFriendsUsingGET(@ApiParam(value = "currentUserId",required=true) @PathVariable("currentUserId") String currentUserId,@ApiParam(value = "registeredUserId",required=true) @PathVariable("registeredUserId") String registeredUserId);
 
 
     @ApiOperation(value = "countOfWellWishersByUserId", nickname = "countOfWellWishersByUserIdUsingGET", notes = "", response = Long.class, tags={ "registered-user-graph-resource", })

@@ -480,6 +480,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 		
 	}
 	
+	
 	/**
 	 * Check a Friend relationship.
 	 *
@@ -487,14 +488,12 @@ import io.github.jhipster.web.util.ResponseUtil;
 	 * @param registeredUserTwoUserId the registered user id
 	 * @return the FRIEND_OF registered user
 	 */
-	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserOneUserId}/{registeredUserTwoUserId}")
-	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserOneUserId,@PathVariable String registeredUserTwoUserId)
+	@GetMapping("/registeredUser/registeredUsers-AreFriends/{currentUserId}/{registeredUserId}")
+	public Boolean checkRegisteredUsersAreFriends(@PathVariable String currentUserId,@PathVariable String registeredUserId)
 	{
-		log.debug("REST request to check RegisteredUsers are friends : {}", registeredUserOneUserId,registeredUserTwoUserId);
+		log.debug("REST request to check RegisteredUsers are friends : {}", currentUserId,registeredUserId);
 		
-		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(registeredUserOneUserId, registeredUserTwoUserId).getBody();
-				
-		
+		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(currentUserId, registeredUserId).getBody();
 	}
 
     
