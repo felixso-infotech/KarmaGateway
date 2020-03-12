@@ -349,16 +349,16 @@ public class GatewayAggregateCommandResource {
      * @return the String value
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-	@PostMapping("/createWellWisher-wellWishing/registeredUser/")
-	public String createWellWisherAndWellWishing(@RequestBody RegisteredUserModel registeredUserModel) throws URISyntaxException {
+	@PostMapping("/create-wellwisher-friend/registeredUser/")
+	public String createWellWisherOrFriend(@RequestBody RegisteredUserModel registeredUserModel)throws URISyntaxException {
 		
-		log.debug("request to create welwisher-wellwishing  currentuser:" + registeredUserModel.getCurrentUser() + " registeredUser:" + registeredUserModel.getRegisteredUser());
-		
+		log.debug("request to create welwisher-wellwishing  currentuser:{} registeredUser:{}",registeredUserModel.getCurrentUser(),registeredUserModel.getRegisteredUser());
+
 		return registeredUserGraphResourceApi.createWellWisherOrFriendUsingPOST(registeredUserModel).getBody();
-		
 		
 	}
 	
+
 	
 	/**
      * POST /unFollow-unFriend/registeredUser/{currentUserId}/{registeredUserId} : unFollow Or UnFriend.
