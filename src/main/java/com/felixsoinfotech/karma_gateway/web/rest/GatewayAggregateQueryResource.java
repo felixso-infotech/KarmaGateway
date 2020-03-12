@@ -470,11 +470,11 @@ import io.github.jhipster.web.util.ResponseUtil;
 	 * @return Boolean value if relationship exist or not
 	 */
 	@GetMapping("/registeredUser/is-Friend/{userId}/{friendId}")
-	public Boolean checkRegisteredUserIsFriend(String userId, String friendId) {
+	public Boolean checkRegisteredUserIsFriend(@PathVariable String userId,@PathVariable String friendId) {
 		
 		log.debug("request to check whether a user is friend or not By UserId:{} friendId:{}",userId,friendId);	
 		
-		return registeredUserGraphResourceApi.checkRegisteredUserIsFriendUsingGET(friendId, userId).getBody();
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFriendUsingGET(userId, friendId).getBody();
 	}
 
 

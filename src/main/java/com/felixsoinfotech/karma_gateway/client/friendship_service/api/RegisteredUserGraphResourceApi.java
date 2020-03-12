@@ -26,7 +26,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-03-12T10:38:41.530+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-03-12T12:58:03.271+05:30[Asia/Calcutta]")
 
 @Api(value = "RegisteredUserGraphResource", description = "the RegisteredUserGraphResource API")
 public interface RegisteredUserGraphResourceApi {
@@ -64,7 +64,7 @@ public interface RegisteredUserGraphResourceApi {
     @RequestMapping(value = "/api/graph/registeredUser/is-Friend/{userId}/{friendId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<Boolean> checkRegisteredUserIsFriendUsingGET(@ApiParam(value = "friendId") @Valid @RequestParam(value = "friendId", required = false) String friendId,@ApiParam(value = "userId") @Valid @RequestParam(value = "userId", required = false) String userId);
+    ResponseEntity<Boolean> checkRegisteredUserIsFriendUsingGET(@ApiParam(value = "friendId",required=true) @PathVariable("friendId") String friendId,@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
     @ApiOperation(value = "countOfWellWishersByUserId", nickname = "countOfWellWishersByUserIdUsingGET", notes = "", response = Long.class, tags={ "registered-user-graph-resource", })
