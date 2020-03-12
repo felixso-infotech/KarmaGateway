@@ -343,20 +343,38 @@ public class GatewayAggregateCommandResource {
 	
 	
 	/**
-	 * POST /createWellWisher-wellWishing/registeredUser/ create well
-	 * wisher-wellwishing relationship
-	 *
-	 * @param registeredUserModel the registeredUserModel.
-	 *
-	 */
+     * POST /create-wellwisher-friend/registeredUser/ : create WellWisher Or Friend.
+     *
+     * @param RegisteredUserModel the RegisteredUserModel to create.
+     * @return the String value
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
 	@PostMapping("/createWellWisher-wellWishing/registeredUser/")
 	public String createWellWisherAndWellWishing(@RequestBody RegisteredUserModel registeredUserModel) throws URISyntaxException {
 		
 		log.debug("request to create welwisher-wellwishing  currentuser:" + registeredUserModel.getCurrentUser() + " registeredUser:" + registeredUserModel.getRegisteredUser());
 		
-		return registeredUserGraphResourceApi.createWellWisherAndWellWishingUsingPOST(registeredUserModel).getBody();
+		return registeredUserGraphResourceApi.createWellWisherOrFriendUsingPOST(registeredUserModel).getBody();
 		
 		
+	}
+	
+	
+	/**
+     * POST /unFollow-unFriend/registeredUser/{currentUserId}/{registeredUserId} : unFollow Or UnFriend.
+     *
+     * @param currentUserId the registered user id
+     * @param registeredUserId the registered user id
+     * 
+     * @return the String value
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+	@PostMapping("/unFollow-unFriend/registeredUser/{currentUserId}/{registeredUserId}")
+	public String unFollowOrUnFriend(@PathVariable String currentUserId,@PathVariable String registeredUserId)throws URISyntaxException {
+		
+		log.debug("request to create welwisher-wellwishing  currentuserId:{} registeredUserId:{}",currentUserId,registeredUserId);
+
+		return registeredUserGraphResourceApi.unFollowOrUnFriendUsingPOST(currentUserId, registeredUserId).getBody();
 	}
 	
 	

@@ -5,8 +5,8 @@
  */
 package com.felixsoinfotech.karma_gateway.client.friendship_service.api;
 
-import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUser;
 import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUserModel;
+import com.felixsoinfotech.karma_gateway.client.friendship_service.model.WellwisherAndRelationship;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,10 +26,22 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-02-08T14:53:19.796+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-03-12T10:38:41.530+05:30[Asia/Calcutta]")
 
 @Api(value = "RegisteredUserGraphResource", description = "the RegisteredUserGraphResource API")
 public interface RegisteredUserGraphResourceApi {
+
+    @ApiOperation(value = "checkRegisteredUserIsFollowedOrIsFriend", nickname = "checkRegisteredUserIsFollowedOrIsFriendUsingGET", notes = "", response = Boolean.class, tags={ "registered-user-graph-resource", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK", response = Boolean.class),
+        @ApiResponse(code = 401, message = "Unauthorized"),
+        @ApiResponse(code = 403, message = "Forbidden"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @RequestMapping(value = "/api/graph/registeredUser/isFollowed-isFriend/{currentUserId}/{registeredUserId}",
+        produces = "*/*", 
+        method = RequestMethod.GET)
+    ResponseEntity<Boolean> checkRegisteredUserIsFollowedOrIsFriendUsingGET(@ApiParam(value = "currentUserId",required=true) @PathVariable("currentUserId") String currentUserId,@ApiParam(value = "registeredUserId",required=true) @PathVariable("registeredUserId") String registeredUserId);
+
 
     @ApiOperation(value = "checkRegisteredUserIsFollowed", nickname = "checkRegisteredUserIsFollowedUsingGET", notes = "", response = Boolean.class, tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
@@ -37,34 +49,22 @@ public interface RegisteredUserGraphResourceApi {
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/registeredUser/Is-Followed/{userId}/{wellWisherId}",
+    @RequestMapping(value = "/api/graph/registeredUser/is-Followed/{userId}/{wellWisherId}",
         produces = "*/*", 
         method = RequestMethod.GET)
     ResponseEntity<Boolean> checkRegisteredUserIsFollowedUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "wellWisherId",required=true) @PathVariable("wellWisherId") String wellWisherId);
 
 
-    @ApiOperation(value = "checkRegisteredUserIsFollowing", nickname = "checkRegisteredUserIsFollowingUsingGET", notes = "", response = Boolean.class, tags={ "registered-user-graph-resource", })
+    @ApiOperation(value = "checkRegisteredUserIsFriend", nickname = "checkRegisteredUserIsFriendUsingGET", notes = "", response = Boolean.class, tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = Boolean.class),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/registeredUser/Is-Following/{userId}/{wellWishingId}",
+    @RequestMapping(value = "/api/graph/registeredUser/is-Friend/{userId}/{friendId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<Boolean> checkRegisteredUserIsFollowingUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId,@ApiParam(value = "wellWishingId",required=true) @PathVariable("wellWishingId") String wellWishingId);
-
-
-    @ApiOperation(value = "checkRegisteredUsersAreFriends", nickname = "checkRegisteredUsersAreFriendsUsingGET", notes = "", response = Boolean.class, tags={ "registered-user-graph-resource", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = Boolean.class),
-        @ApiResponse(code = 401, message = "Unauthorized"),
-        @ApiResponse(code = 403, message = "Forbidden"),
-        @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/registeredUser/registeredUsers-AreFriends/{currentUserId}/{registeredUserId}",
-        produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<Boolean> checkRegisteredUsersAreFriendsUsingGET(@ApiParam(value = "currentUserId",required=true) @PathVariable("currentUserId") String currentUserId,@ApiParam(value = "registeredUserId",required=true) @PathVariable("registeredUserId") String registeredUserId);
+    ResponseEntity<Boolean> checkRegisteredUserIsFriendUsingGET(@ApiParam(value = "friendId") @Valid @RequestParam(value = "friendId", required = false) String friendId,@ApiParam(value = "userId") @Valid @RequestParam(value = "userId", required = false) String userId);
 
 
     @ApiOperation(value = "countOfWellWishersByUserId", nickname = "countOfWellWishersByUserIdUsingGET", notes = "", response = Long.class, tags={ "registered-user-graph-resource", })
@@ -91,53 +91,54 @@ public interface RegisteredUserGraphResourceApi {
     ResponseEntity<Long> countOfWellWishingByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
-    @ApiOperation(value = "createWellWisherAndWellWishing", nickname = "createWellWisherAndWellWishingUsingPOST", notes = "", response = String.class, tags={ "registered-user-graph-resource", })
+    @ApiOperation(value = "createWellWisherOrFriend", nickname = "createWellWisherOrFriendUsingPOST", notes = "", response = String.class, tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "OK", response = String.class),
         @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/createWellWisher-wellWishing/registeredUser/",
+    @RequestMapping(value = "/api/graph/create-wellwisher-friend/registeredUser/",
         produces = "*/*", 
         consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<String> createWellWisherAndWellWishingUsingPOST(@ApiParam(value = "registeredUserModel" ,required=true )  @Valid @RequestBody RegisteredUserModel registeredUserModel);
+    ResponseEntity<String> createWellWisherOrFriendUsingPOST(@ApiParam(value = "registeredUserModel" ,required=true )  @Valid @RequestBody RegisteredUserModel registeredUserModel);
 
 
-    @ApiOperation(value = "findAllWellWishersByUserId", nickname = "findAllWellWishersByUserIdUsingGET", notes = "", response = RegisteredUser.class, responseContainer = "List", tags={ "registered-user-graph-resource", })
+    @ApiOperation(value = "findAllWellWishersByUserId", nickname = "findAllWellWishersByUserIdUsingGET", notes = "", response = WellwisherAndRelationship.class, responseContainer = "List", tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = RegisteredUser.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "OK", response = WellwisherAndRelationship.class, responseContainer = "List"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/api/graph/registeredUser/well-Wishers/{userId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<List<RegisteredUser>> findAllWellWishersByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
+    ResponseEntity<List<WellwisherAndRelationship>> findAllWellWishersByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
-    @ApiOperation(value = "findAllWellWishingByUserId", nickname = "findAllWellWishingByUserIdUsingGET", notes = "", response = RegisteredUser.class, responseContainer = "List", tags={ "registered-user-graph-resource", })
+    @ApiOperation(value = "findAllWellWishingByUserId", nickname = "findAllWellWishingByUserIdUsingGET", notes = "", response = WellwisherAndRelationship.class, responseContainer = "List", tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = RegisteredUser.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "OK", response = WellwisherAndRelationship.class, responseContainer = "List"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
     @RequestMapping(value = "/api/graph/registeredUser/well-Wishing/{userId}",
         produces = "*/*", 
         method = RequestMethod.GET)
-    ResponseEntity<List<RegisteredUser>> findAllWellWishingByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
+    ResponseEntity<List<WellwisherAndRelationship>> findAllWellWishingByUserIdUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
 
 
-    @ApiOperation(value = "getRegisteredUserIsExist", nickname = "getRegisteredUserIsExistUsingGET", notes = "", response = RegisteredUser.class, tags={ "registered-user-graph-resource", })
+    @ApiOperation(value = "unFollowOrUnFriend", nickname = "unFollowOrUnFriendUsingPOST", notes = "", response = String.class, tags={ "registered-user-graph-resource", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "OK", response = RegisteredUser.class),
+        @ApiResponse(code = 200, message = "OK", response = String.class),
+        @ApiResponse(code = 201, message = "Created"),
         @ApiResponse(code = 401, message = "Unauthorized"),
         @ApiResponse(code = 403, message = "Forbidden"),
         @ApiResponse(code = 404, message = "Not Found") })
-    @RequestMapping(value = "/api/graph/registeredUser/is-exist/{userId}",
+    @RequestMapping(value = "/api/graph/unFollow-unFriend/registeredUser/{currentUserId}/{registeredUserId}",
         produces = "*/*", 
-        method = RequestMethod.GET)
-    ResponseEntity<RegisteredUser> getRegisteredUserIsExistUsingGET(@ApiParam(value = "userId",required=true) @PathVariable("userId") String userId);
+        method = RequestMethod.POST)
+    ResponseEntity<String> unFollowOrUnFriendUsingPOST(@ApiParam(value = "currentUserId",required=true) @PathVariable("currentUserId") String currentUserId,@ApiParam(value = "registeredUserId",required=true) @PathVariable("registeredUserId") String registeredUserId);
 
 }

@@ -11,58 +11,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * RegisteredUserModel
+ * WellwisherAndRelationship
  */
 @Validated
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-03-12T10:38:41.530+05:30[Asia/Calcutta]")
 
-public class RegisteredUserModel   {
-  @JsonProperty("currentUser")
-  private RegisteredUser currentUser = null;
+public class WellwisherAndRelationship   {
+  @JsonProperty("relationshipType")
+  private String relationshipType = null;
 
-  @JsonProperty("registeredUser")
-  private RegisteredUser registeredUser = null;
+  @JsonProperty("wellWisher")
+  private RegisteredUser wellWisher = null;
 
-  public RegisteredUserModel currentUser(RegisteredUser currentUser) {
-    this.currentUser = currentUser;
+  public WellwisherAndRelationship relationshipType(String relationshipType) {
+    this.relationshipType = relationshipType;
     return this;
   }
 
   /**
-   * Get currentUser
-   * @return currentUser
+   * Get relationshipType
+   * @return relationshipType
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getRelationshipType() {
+    return relationshipType;
+  }
+
+  public void setRelationshipType(String relationshipType) {
+    this.relationshipType = relationshipType;
+  }
+
+  public WellwisherAndRelationship wellWisher(RegisteredUser wellWisher) {
+    this.wellWisher = wellWisher;
+    return this;
+  }
+
+  /**
+   * Get wellWisher
+   * @return wellWisher
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public RegisteredUser getCurrentUser() {
-    return currentUser;
+  public RegisteredUser getWellWisher() {
+    return wellWisher;
   }
 
-  public void setCurrentUser(RegisteredUser currentUser) {
-    this.currentUser = currentUser;
-  }
-
-  public RegisteredUserModel registeredUser(RegisteredUser registeredUser) {
-    this.registeredUser = registeredUser;
-    return this;
-  }
-
-  /**
-   * Get registeredUser
-   * @return registeredUser
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public RegisteredUser getRegisteredUser() {
-    return registeredUser;
-  }
-
-  public void setRegisteredUser(RegisteredUser registeredUser) {
-    this.registeredUser = registeredUser;
+  public void setWellWisher(RegisteredUser wellWisher) {
+    this.wellWisher = wellWisher;
   }
 
 
@@ -74,23 +73,23 @@ public class RegisteredUserModel   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    RegisteredUserModel registeredUserModel = (RegisteredUserModel) o;
-    return Objects.equals(this.currentUser, registeredUserModel.currentUser) &&
-        Objects.equals(this.registeredUser, registeredUserModel.registeredUser);
+    WellwisherAndRelationship wellwisherAndRelationship = (WellwisherAndRelationship) o;
+    return Objects.equals(this.relationshipType, wellwisherAndRelationship.relationshipType) &&
+        Objects.equals(this.wellWisher, wellwisherAndRelationship.wellWisher);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(currentUser, registeredUser);
+    return Objects.hash(relationshipType, wellWisher);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RegisteredUserModel {\n");
+    sb.append("class WellwisherAndRelationship {\n");
     
-    sb.append("    currentUser: ").append(toIndentedString(currentUser)).append("\n");
-    sb.append("    registeredUser: ").append(toIndentedString(registeredUser)).append("\n");
+    sb.append("    relationshipType: ").append(toIndentedString(relationshipType)).append("\n");
+    sb.append("    wellWisher: ").append(toIndentedString(wellWisher)).append("\n");
     sb.append("}");
     return sb.toString();
   }

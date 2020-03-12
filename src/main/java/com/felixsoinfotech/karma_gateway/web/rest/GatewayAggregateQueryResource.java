@@ -29,7 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;  
 import com.codahale.metrics.annotation.Timed;
 import com.felixsoinfotech.karma_gateway.client.friendship_service.api.RegisteredUserGraphResourceApi;
-import com.felixsoinfotech.karma_gateway.client.friendship_service.model.RegisteredUser;
+
+import com.felixsoinfotech.karma_gateway.client.friendship_service.model.WellwisherAndRelationship;
 import com.felixsoinfotech.karma_gateway.client.karma.api.AggregateQueryResourceApi;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ActivityViewAggregate;
 import com.felixsoinfotech.karma_gateway.client.karma.model.ChallengeDTO;
@@ -44,7 +45,6 @@ import com.felixsoinfotech.karma_gateway.client.user_response.model.ReplyAggrega
 import com.felixsoinfotech.karma_gateway.security.SecurityUtils;
 import com.felixsoinfotech.karma_gateway.service.GatewayAggregateQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
-
 
 
   
@@ -394,103 +394,103 @@ import io.github.jhipster.web.util.ResponseUtil;
     
     /**
 	 * GET /registeredUser/wellWisher/{userId} : get all well wishers by user id
-	 *
 	 * @param userId the registered user id
+	 * @return list of wellwisher registered users
 	 */
 	@GetMapping("/registeredUser/well-Wishers/{userId}")
-	public List<RegisteredUser> findAllWellWishersByUserId(@PathVariable String userId) {
+	public List<WellwisherAndRelationship> findAllWellWishersByUserId(@PathVariable String userId) {
 		
-		log.debug("REST request to get a list of WellWishers By UserId : {}", userId);
+		log.debug("request to get All WellWishers By UserId:{} ",userId);
 		
 		return registeredUserGraphResourceApi.findAllWellWishersByUserIdUsingGET(userId).getBody();
-		
 	}
-	
+
 	/**
 	 * GET /registeredUser/wellWishing/{userId} : get all well wishers by user id
-	 *
+	*	
 	 * @param userId the registered user id
+	 * @return list of wellwishing registered users
 	 */
 	@GetMapping("/registeredUser/well-Wishing/{userId}")
-	public List<RegisteredUser> findAllWellWishingByUserId(@PathVariable String userId) {
+	public List<WellwisherAndRelationship> findAllWellWishingByUserId(@PathVariable String userId) {
 		
-		log.debug("REST request to get a list of WellWishing By UserId : {}", userId);
+		log.debug("request to get All WellWishing By UserId:{} ",userId);
 		
 		return registeredUserGraphResourceApi.findAllWellWishingByUserIdUsingGET(userId).getBody();
-				
 	}
-	
+
 	/**
 	 * GET /registeredUser/wellWisher/{userId} : get count well wishers by user id
-	 *
+	 * 
 	 * @param userId the registered user id
+	 * @return count of wellwishers registered users
 	 */
-	@GetMapping("/registeredUser/wellWishers-count/{userId}")	
+	@GetMapping("/registeredUser/wellWishers-count/{userId}")
 	public Long countOfWellWishersByUserId(@PathVariable String userId) {
 		
-		log.debug("REST request to get count of WellWishers By UserId : {}", userId);
+		log.debug("request to get count WellWishers By UserId:{} ",userId);
 		
 		return registeredUserGraphResourceApi.countOfWellWishersByUserIdUsingGET(userId).getBody();
-				
 	}
-	
+
 	/**
 	 * GET /registeredUser/wellWishing/{userId} : get count well wishing by user id
 	 *
 	 * @param userId the registered user id
+	 * @return count of well wishing registered users
 	 */
 	@GetMapping("/registeredUser/wellWishing-count/{userId}")
 	public Long countOfWellWishingByUserId(@PathVariable String userId) {
 		
-		log.debug("REST request to get count of WellWishing By UserId : {}", userId);
+		log.debug("request to get count WellWishing By UserId:{} ",userId);
 		
 		return registeredUserGraphResourceApi.countOfWellWishingByUserIdUsingGET(userId).getBody();
+	}
 
-	}
-	
 	/**
-	 * Check a well wishing relationship.
+	 * GET /registeredUser/is-Followed/{userId}/{wellWisherId} : check RegisteredUser Is Followed by user id
 	 *
-	 * @param wellWishingId the registered user id
-	 * @return the well wishing registered user
+	 * @param userId        the registered user id
+	 * @param wellWisherId the registered user id
+	 * @return Boolean value if relationship exist or not
 	 */
-	@GetMapping("/registeredUser/Is-Following/{wellWishingId}")
-	public Boolean checkRegisteredUserIsFollowing(@PathVariable String wellWishingId){
+	@GetMapping("/registeredUser/is-Followed/{userId}/{wellWisherId}")
+	public Boolean checkRegisteredUserIsFollowed(@PathVariable String userId, @PathVariable String wellWisherId) {
 		
-		log.debug("REST request to check RegisteredUser Is Following : {}",SecurityUtils.getCurrentUserLogin().get(),wellWishingId);
+		log.debug("request to check whether a user is WellWisher or not By UserId:{} wellWisherId:{}",userId,wellWisherId);	
 		
-		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowingUsingGET(SecurityUtils.getCurrentUserLogin().get(),wellWishingId).getBody();
-		
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedUsingGET(userId, wellWisherId).getBody();
 	}
 	
 	/**
-	 * Check a well wishing relationship.
+	 * GET /registeredUser/is-Friend/{userId}/{friendId} : check RegisteredUser Is Friend
 	 *
-	 * @param wellWishingId the registered user id
-	 * @return the well wisher registered user
+	 * @param userId        the registered user id
+	 * @param friend the registered user id
+	 * @return Boolean value if relationship exist or not
 	 */
-	@GetMapping("/registeredUser/Is-Followed/{wellWisherId}")
-	public Boolean checkRegisteredUserIsFollowed(@PathVariable String wellWisherId)
-	{
-		log.debug("REST request to check RegisteredUser Is Followed : {}",SecurityUtils.getCurrentUserLogin().get(),wellWisherId);
+	@GetMapping("/registeredUser/is-Friend/{userId}/{friendId}")
+	public Boolean checkRegisteredUserIsFriend(String userId, String friendId) {
 		
-		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedUsingGET(SecurityUtils.getCurrentUserLogin().get(),wellWisherId).getBody();
+		log.debug("request to check whether a user is friend or not By UserId:{} friendId:{}",userId,friendId);	
 		
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFriendUsingGET(friendId, userId).getBody();
 	}
-	
-	
+
+
 	/**
-	 * Check a Friend relationship.
+	 * GET /registeredUser/isFollowed-isFriend/{currentUserId}/{registeredUserId} : check RegisteredUser Is Followed Or Is Friend
 	 *
+	 * @param currentUserId the registered user id
 	 * @param registeredUserId the registered user id
-	 * @return the FRIEND_OF registered user
+	 * @return Boolean value if relationship exist or not
 	 */
-	@GetMapping("/registeredUser/registeredUsers-AreFriends/{registeredUserId}")
-	public Boolean checkRegisteredUsersAreFriends(@PathVariable String registeredUserId)
-	{
-		log.debug("REST request to check RegisteredUsers are friends : {}",SecurityUtils.getCurrentUserLogin().get(),registeredUserId);
+	@GetMapping("/registeredUser/isFollowed-isFriend/{currentUserId}/{registeredUserId}")
+	public Boolean checkRegisteredUserIsFollowedOrIsFriend(@PathVariable String currentUserId,@PathVariable String registeredUserId) {
 		
-		return registeredUserGraphResourceApi.checkRegisteredUsersAreFriendsUsingGET(SecurityUtils.getCurrentUserLogin().get(),registeredUserId).getBody();
+		log.debug("request to check whether a user is wellwisher or friend or not By UserId:{} friendId:{}",currentUserId,registeredUserId);	
+		
+		return registeredUserGraphResourceApi.checkRegisteredUserIsFollowedOrIsFriendUsingGET(currentUserId, registeredUserId).getBody();
 	}
 
     
